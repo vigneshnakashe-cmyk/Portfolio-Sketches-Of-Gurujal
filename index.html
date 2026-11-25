@@ -1,0 +1,4199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sketches and Drawing Portfolio</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="services.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (yeh missing tha, isi wajah se "bootstrap is not defined" error aa raha tha) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- ===== Dark/Light Mode Toggle Styles ===== -->
+    <style>
+        /* switch button — fixed, same position on desktop/tablet/mobile */
+        #themeToggleBtn {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 3000;
+            width: 58px;
+            height: 30px;
+            border-radius: 30px;
+            border: 1.5px solid rgba(0, 238, 255, 0.5);
+            background: rgba(10, 14, 26, 0.85);
+            backdrop-filter: blur(6px);
+            cursor: pointer;
+            padding: 3px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        #themeToggleBtn .toggle-knob {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #FFD700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            line-height: 1;
+            transform: translateX(0);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        body.dark-mode #themeToggleBtn {
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255,255,255,0.08);
+        }
+
+        body.dark-mode #themeToggleBtn .toggle-knob {
+            transform: translateX(28px);
+            background: #0a0e1a;
+        }
+
+        @media (max-width: 480px) {
+            #themeToggleBtn {
+                top: 12px;
+                right: 12px;
+                width: 50px;
+                height: 26px;
+            }
+            #themeToggleBtn .toggle-knob {
+                width: 18px;
+                height: 18px;
+                font-size: 11px;
+            }
+            body.dark-mode #themeToggleBtn .toggle-knob {
+                transform: translateX(24px);
+            }
+        }
+
+        /* ===== Dark Mode Override (applied when body.dark-mode is active) =====
+           Selectors here deliberately match the real classes/IDs in
+           stylesheet.css / services.css so specificity + !important
+           correctly beats the original rules. */
+
+        /* Base */
+        body.dark-mode {
+            background: #0a0e1a !important;
+            color: #e8e8e8 !important;
+        }
+
+        /* Header / Navbar (was: linear-gradient #1f1f1f -> white) */
+        body.dark-mode .header {
+            background: #0a0e1a !important;
+        }
+        body.dark-mode .logo {
+            color: #00eeff !important;
+        }
+        body.dark-mode #menu-icon {
+            color: #00eeff !important;
+        }
+        body.dark-mode .mynavbar {
+            background: #0a0e1a !important;
+        }
+        body.dark-mode .mynavbar a {
+            background: #0a0e1a !important;
+            color: #00eeff !important;
+            border: 1px solid rgba(0,238,255,.4) !important;
+            box-shadow: none !important;
+        }
+        body.dark-mode .mynavbar a:hover {
+            background: #00eeff !important;
+            color: #081b29 !important;
+        }
+        body.dark-mode .dropdown-content,
+        body.dark-mode .dropdown-menu {
+            background: #12151f !important;
+        }
+
+        /* About Section (was: #about background:#fff !important) */
+        body.dark-mode #about {
+            background: #0a0e1a !important;
+            color: #e8e8e8 !important;
+        }
+        body.dark-mode .about-details h2 {
+            color: #ffffff !important;
+        }
+        body.dark-mode .about-details p {
+            color: #c9d2e0 !important;
+        }
+
+        /* Sketches Section (was: background:white) */
+        body.dark-mode .sketches-section {
+            background: #0a0e1a !important;
+        }
+
+        /* Contact Form (was: white card with black borders/inputs) */
+        body.dark-mode .contact-form {
+            background: #12151f !important;
+            border-color: rgba(255,255,255,.15) !important;
+        }
+        body.dark-mode .contact-form label {
+            color: #e8e8e8 !important;
+        }
+        body.dark-mode .contact-form input,
+        body.dark-mode .contact-form textarea,
+        body.dark-mode .contact-form select {
+            background: #1a1d29 !important;
+            color: #e8e8e8 !important;
+            border-color: rgba(255,255,255,.2) !important;
+        }
+        body.dark-mode .contact-form input:focus,
+        body.dark-mode .contact-form textarea:focus,
+        body.dark-mode .contact-form select:focus {
+            border-color: #00eeff !important;
+            box-shadow: 0 0 12px #00eeff !important;
+        }
+
+        /* Music player popup (already dark-ish, keep consistent) */
+        body.dark-mode #musicPlayer {
+            background: #12151f !important;
+            border-color: rgba(255,255,255,.12) !important;
+        }
+
+        /* keep images/photos untouched so sketch colors don't get affected */
+        body.dark-mode img,
+        body.dark-mode video {
+            filter: none !important;
+            opacity: 1 !important;
+        }
+
+        /* ===== Sign In Button — fixed below dark mode toggle ===== */
+        .btn-cyan-login{
+            position:fixed;
+            top:56px;
+            right:18px;
+            z-index:3001;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:8px 22px;
+            font-size:13px;
+            font-weight:700;
+            letter-spacing:.5px;
+            color:#fff;
+            text-decoration:none;
+            border:1.5px solid rgba(0,234,255,.5);
+            border-radius:30px;
+            background: cyan;
+            backdrop-filter:blur(6px);
+            -webkit-backdrop-filter:blur(6px);
+            cursor:pointer;
+            transition:all .35s ease;
+            overflow:hidden;
+        }
+        .btn-cyan-login::before{
+            content:'';
+            position:absolute;
+            top:0;left:-100%;
+            width:100%;height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+            transition:left .5s ease;
+        }
+        .btn-cyan-login:hover::before{
+            left:100%;
+        }
+        .btn-cyan-login i{
+            font-size:14px;
+            transition:transform .3s ease;
+        }
+        .btn-cyan-login:hover i{
+            transform:translateX(4px);
+        }
+        /* Hover: yellow background + cyan glow */
+        .btn-cyan-login:hover{
+            color:#1a1a1a;
+            background:linear-gradient(135deg,#FFD700,#e6b800);
+            border-color:#FFD700;
+            box-shadow:
+                0 0 200px cyan,
+                0 0 200px cyan,
+                0 0 200px cyan,
+                inset 0 0 15px cyan;
+            transform:translateY(-2px);
+        }
+        .btn-cyan-login:active{
+            transform:translateY(0);
+            box-shadow:0 0 12px rgba(0,234,255,.4),0 0 25px rgba(0,234,255,.2);
+        }
+
+        @media (max-width:480px){
+            .btn-cyan-login{
+                top:44px;
+                right:12px;
+                padding:7px 16px;
+                font-size:12px;
+            }
+        }
+    </style>
+    <style>
+.user-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #e6b800);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px; font-weight: bold;
+    cursor: pointer;
+    border: 2px solid cyan;
+    box-shadow: 0 0 12px cyan;
+    transition: transform 0.3s ease;
+}
+.user-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px cyan;
+}
+.user-dropdown {
+    display: none;
+    margin-top: 8px;
+    background: #111;
+    border: 1px solid cyan;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.user-dropdown button {
+    width: 100%; border: none; background: none;
+    color: white; padding: 10px 20px; cursor: pointer; font-size: 14px;
+}
+.user-dropdown button:hover {
+    background: cyan; color: black;
+}
+</style>
+
+<style>
+/* Avatar styling — agar pehle se hai toh yeh skip kar sakte ho */
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #e6b800);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid cyan;
+    box-shadow: 0 0 12px cyan;
+    transition: transform 0.3s ease;
+}
+.user-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px cyan;
+}
+
+.user-dropdown {
+    display: none;
+    margin-top: 8px;
+    background: #111;
+    border: 1px solid cyan;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.user-dropdown button {
+    width: 100%;
+    border: none;
+    background: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.user-dropdown button:hover {
+    background: cyan;
+    color: black;
+}
+</style>
+<style>
+/* Section ke andar dropdown clip na ho */
+#sketches.sketches-section {
+    overflow: visible !important;
+}
+
+.kajal-heading-wrap {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.kajal-dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 1000;
+}
+
+/* Trigger button */
+.kajal-dropbtn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 30px;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s ease,
+                background-color 0.35s ease,
+                color 0.35s ease !important;
+}
+
+.kajal-dropdown:hover .kajal-dropbtn,
+.kajal-dropdown.open .kajal-dropbtn {
+    background: #0ef !important;
+    color: #081b29 !important;
+    text-shadow: none !important;
+    box-shadow:
+        0 0 10px #0ef,
+        0 0 25px #0ef,
+        0 0 50px #0ef !important;
+    transform: translateY(-3px);
+}
+
+/* Gap = 0 rakha hai (top: 100%) taaki button se menu par jaate hi hover na toote */
+.kajal-dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    min-width: 265px;
+    margin-top: 0;
+    padding: 6px 0;
+    background: #112e42 !important;
+    border: 1px solid rgba(0, 238, 255, 0.45);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 22px rgba(0, 238, 255, 0.25);
+    z-index: 9999;
+
+    /* Smooth slide + pop-down animation */
+    display: block !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, -18px) scaleY(0.88);
+    transform-origin: top center;
+    transition:
+        opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.24s ease;
+}
+
+/* Hover / Click Open State */
+.kajal-dropdown:hover .kajal-dropdown-content,
+.kajal-dropdown.open .kajal-dropdown-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translate(-50%, 6px) scaleY(1) !important;
+}
+
+/* Dropdown links */
+.kajal-dropdown-content a {
+    display: block !important;
+    text-align: left;
+    background: transparent !important;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 18px;
+    text-decoration: none !important;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        padding-left 0.22s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Cursor rakhne par #0ef Cyan highlight */
+.kajal-dropdown-content a:hover,
+.kajal-dropdown-content a:focus {
+    background: #0ef !important;
+    color: #081b29 !important;
+    padding-left: 26px !important;
+    box-shadow: inset 0 0 12px rgba(8, 27, 41, 0.25);
+}
+
+body.dark-mode .kajal-dropdown-content {
+    background: #12151f !important;
+}
+
+body.dark-mode .kajal-dropdown-content a:hover {
+    background: #0ef !important;
+    color: #081b29 !important;
+}
+#sketches.sketches-section {
+    overflow: visible !important;
+}
+
+.kajal-dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 9999;
+}
+
+.kajal-dropbtn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 30px;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: all 0.35s ease !important;
+}
+
+.kajal-dropdown:hover .kajal-dropbtn {
+    background: #0ef !important;
+    color: #081b29 !important;
+    text-shadow: none !important;
+    box-shadow: 0 0 15px #0ef, 0 0 35px #0ef !important;
+}
+
+.kajal-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 260px;
+    background: #112e42 !important;
+    border: 1px solid #0ef;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+    animation: kajalDropAnim 0.3s ease forwards;
+}
+
+@keyframes kajalDropAnim {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-12px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.kajal-dropdown:hover .kajal-dropdown-content {
+    display: block;
+}
+
+.kajal-dropdown-content a {
+    display: block !important;
+    text-align: left;
+    background: transparent !important;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 18px;
+    text-decoration: none !important;
+    transition: all 0.25s ease !important;
+}
+
+.kajal-dropdown-content a:hover {
+    background: #0ef !important;
+    color: #081b29 !important;
+    padding-left: 24px !important;
+}
+</style>
+
+<script>
+
+// ===== LOGIN CHECK + AVATAR SHOW =====
+function checkLoginStatus(){
+    const isLoggedIn = localStorage.getItem("loggedIn");
+    const userEmail = localStorage.getItem("userEmail");
+    const signinBtn = document.getElementById("signinBtn");
+    const userMenu = document.getElementById("userMenu");
+    const avatar = document.getElementById("userAvatar");
+
+    if(isLoggedIn === "true" && userEmail && avatar){
+
+        // Sign In button chupao
+        if(signinBtn){
+            signinBtn.style.display = "none";
+        }
+
+        // User menu dikhao
+        if(userMenu){
+            userMenu.style.display = "block";
+            userMenu.style.position = "fixed";
+            userMenu.style.top = "56px";
+            userMenu.style.right = "18px";
+            userMenu.style.zIndex = "3002";
+        }
+
+        // Avatar dikhao
+        avatar.style.display = "flex";
+
+        // Email ka first letter + v symbol
+        let letter = userEmail.charAt(0).toUpperCase();
+        avatar.innerHTML = letter;
+
+    }
+    else{
+        if(signinBtn) signinBtn.style.display = "inline-flex";
+        if(userMenu) userMenu.style.display = "none";
+        if(avatar) avatar.style.display = "none";
+    }
+}
+
+// ===== AVATAR CLICK + DROPDOWN =====
+document.addEventListener("DOMContentLoaded", function(){
+
+    const avatar = document.getElementById("userAvatar");
+    if(avatar){
+        avatar.onclick = function(event){
+            event.stopPropagation();
+            const menu = document.getElementById("userDropdown");
+            if(menu){
+                menu.style.display = (menu.style.display === "block") ? "none" : "block";
+            }
+        };
+    }
+
+    // Click outside to close dropdown
+    document.addEventListener("click", function(event){
+        const menu = document.getElementById("userDropdown");
+        const avatar = document.getElementById("userAvatar");
+        if(menu && menu.style.display === "block"){
+            if(!avatar.contains(event.target) && !menu.contains(event.target)){
+                menu.style.display = "none";
+            }
+        }
+    });
+
+    // Page load hote hi login check karo
+    checkLoginStatus();
+});
+
+// ===== LOGOUT =====
+function logout(){
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
+    window.location.href = "index.html";
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Dark / Light Mode Toggle — fixed position, works on desktop, tablet & mobile -->
+    <button id="themeToggleBtn" title="Toggle Dark Mode">
+        <span class="toggle-knob">☀️</span>
+    </button>
+
+<!-- Sign In Button — fixed, below the dark mode toggle -->
+<a href="login_fixed.html" class="btn-cyan-login" id="signinBtn">
+    Sign In
+    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+</a>
+<div id="userMenu" style="display:none;">
+    <div class="user-avatar" id="userAvatar"></div>
+
+    <div id="userDropdown" class="user-dropdown">
+        <button onclick="logout()">Logout</button>
+    </div>
+</div>
+
+        <header class="header">
+          
+               <a href="#" class="logo">
+    <span class="logo-colors">
+        <span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span>
+    </span>
+
+    <span class="logo-colors">
+        <span>S</span><span>K</span><span>E</span><span>T</span><span>C</span><span>H</span><span>E</span><span>S</span>
+    </span>
+
+    <span class="logo-of">OF</span>
+
+    <span class="logo-colors">
+        <span>G</span><span>U</span><span>R</span><span>U</span><span>J</span><span>A</span><span>L</span>
+    </span>
+</a>
+                  <nav class="mynavbar">
+
+<a href="#home">Home</a>
+
+<a href="#about">About</a>
+
+<a href="#services">My Services</a>
+
+<a href="#creative-skills">Skills</a>
+
+<div class="dropdown">
+    <a href="#sketches" class="dropbtn">Sketches ▼</a>
+
+    <div class="dropdown-content">
+        <a href="#sketches">✏️ Pencil Sketches</a>
+        <a href="#colorpaintings">🎨 Color Paintings</a>
+        <a href="#crafts">🛠️ Crafts</a>
+        <a href="#divine-art">🕉️ Wall Art & God Paintings</a>
+    </div>
+</div>
+
+<a href="#portfolio">Portfolio</a>
+
+<a href="#gallery">Gallery</a>
+
+<a href="#testimonials">Testimonials</a>
+
+<!--<a href="#gallery">Gallery</a>-->
+
+<a href="#contact">Contact Us</a>
+
+</nav>
+                  <i class='bx bx-menu' id="menu-icon"></i>
+                  
+       </header>
+       
+<section class="home" id="home">
+
+    <div class="home-content">
+
+        <h1>Hello it's me</h1>
+        <h1>KAJAL's Arts</h1>
+        <h1>I 'M <span class="text"></span></h1>
+
+        <h2 class="home-description">
+            "Kajal's Pencil Art – Bringing life to paper through detailed sketches, creativity, and passion for art."
+        </h2>
+
+        <h2 class="home-description">
+            "Discover the artistic world of Kajal, where creativity knows no limits and every drawing captures emotions, beauty, and inspiration."
+        </h2>
+
+        
+<div class="home-sci">
+
+    <!-- Facebook -->
+    <a href="https://facebook.com/kajalnakashesketches"
+       target="_blank" rel="noopener noreferrer" style="--i:1">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://instagram.com/kajalchandrakantnakashe"
+       target="_blank" rel="noopener noreferrer" style="--i:2">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/918830396883"
+       target="_blank" rel="noopener noreferrer" style="--i:3">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Google Original Logo -->
+    <a href="https://google.com"
+       target="_blank" rel="noopener noreferrer" style="--i:4">
+        <svg class="brand-logo" viewBox="0 0 48 48" aria-label="Google">
+            <path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+            <path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.1c-1.8 1.2-4.1 2-6.8 2-5.2 0-9.6-3.5-11.2-8.2H5.9v5.3A20 20 0 0 0 24 44z"/>
+            <path fill="#FBBC05" d="M12.8 27.8a12 12 0 0 1 0-7.6v-5.3H5.9a20 20 0 0 0 0 18.2z"/>
+            <path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3.1l5.8-5.8C34.1 6.1 29.5 4 24 4A20 20 0 0 0 5.9 14.9l6.9 5.3c1.6-4.7 6-8.1 11.2-8.1z"/>
+        </svg>
+    </a>
+
+    <!-- Google Chrome Original Logo -->
+    <a href="https://www.google.com/chrome/"
+       target="_blank" rel="noopener noreferrer" style="--i:5">
+        <svg class="brand-logo" viewBox="0 0 48 48" aria-label="Google Chrome">
+            <circle cx="24" cy="24" r="22" fill="#EA4335"/>
+            <path d="M24 24 L45.5 24 A22 22 0 0 1 13 43 Z" fill="#FBBC05"/>
+            <path d="M24 24 L13 43 A22 22 0 0 1 3 13 Z" fill="#34A853"/>
+            <circle cx="24" cy="24" r="10.5" fill="#4285F4"/>
+            <circle cx="24" cy="24" r="10.5" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+        </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@kajalnakashesketches"
+       target="_blank" rel="noopener noreferrer" style="--i:6">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+
+</div>
+
+
+        <div class="home-buttons">
+            <a href="#about" class="btn-box">More About ME</a>
+            <a href="#contact" class="btn-box">Contact Us</a>
+        </div>
+
+    </div>
+
+    <div class="home-img">
+        <img src="kajal.jpeg" alt="Kajal">
+    </div>
+
+    <span class="home-imgHover"></span>
+
+</section>
+ <section class="about-section" id="about">
+    <div class="section-content">
+
+        <div class="about-image-wrapper">
+            <img src="gurujal.png.png" alt="Gurujal">
+        </div>
+
+        <div class="about-details">
+            <h2>About Me</h2>
+                <p>
+    Hello! I am Kajal Nakashe, a passionate sketch artist who loves bringing ideas and emotions to life through pencil art. My work focuses on realistic portraits, animal sketches, nature drawings, and creative artwork. Every sketch is created with attention to detail, patience, and dedication to capture the beauty of each subject. Through this portfolio, I share my artistic journey, creativity, and love for drawing with everyone who appreciates handmade art.
+</p>
+        </div>
+
+    </div>
+</section>
+<style>
+/* ------- Existing button (agar nahi hai toh add karo) ------- */
+#musicToggleBtn {
+  background-color: red;
+  color: #1a1a1a;
+  border: none;
+  padding: 13px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 30px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+  animation: btnPulse 1.8s infinite;
+  position: fixed;
+  right: 24px;
+  bottom: 30px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s;
+}
+#musicToggleBtn:hover { transform: scale(1.07); }
+
+@keyframes btnPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(255,215,0,0.4); }
+  50%       { box-shadow: 0 4px 30px rgba(255,215,0,0.95); }
+}
+
+/* ------- Music Player Popup ------- */
+#musicPlayer {
+  position: fixed;
+  right: 24px;
+  bottom: 90px;
+  width: 300px;
+  background: #2a1a0e;
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: 18px;
+  padding: 20px;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  font-family: 'Segoe UI', sans-serif;
+  animation: slideUp 0.25s ease;
+}
+#musicPlayer.open { display: flex; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Track info */
+.mp-track-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: lightgreen;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mp-track-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin: 3px 0 0;
+}
+
+/* Now playing dots */
+.mp-playing-indicator {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+.mp-playing-indicator span {
+  display: block;
+  width: 3px;
+  background: #FFD700;
+  border-radius: 2px;
+  animation: barBounce 0.8s ease-in-out infinite;
+}
+.mp-playing-indicator span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+.mp-playing-indicator span:nth-child(2) { height: 12px; animation-delay: 0.15s; }
+.mp-playing-indicator span:nth-child(3) { height: 8px;  animation-delay: 0.3s; }
+.mp-playing-indicator span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+.mp-playing-indicator.paused span { animation-play-state: paused; }
+
+@keyframes barBounce {
+  0%,100% { transform: scaleY(0.4); }
+  50%      { transform: scaleY(1); }
+}
+
+.mp-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Controls */
+.mp-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.mp-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,215,0,0.2);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  transition: background 0.15s, transform 0.1s;
+}
+.mp-btn:hover { background: rgba(255,215,0,0.15); transform: scale(1.08); }
+
+.mp-play-btn {
+  width: 50px;
+  height: 50px;
+  background: #FFD700;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1a1a1a;
+  transition: transform 0.15s;
+}
+.mp-play-btn:hover { transform: scale(1.1); }
+
+/* Volume */
+.mp-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mp-volume-row label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  min-width: 18px;
+}
+.mp-vol-val {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  min-width: 30px;
+  text-align: right;
+}
+.mp-volume-row input[type=range] {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.15);
+  outline: none;
+  cursor: pointer;
+}
+.mp-volume-row input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: red;
+  cursor: pointer;
+}
+
+/* Track list */
+.mp-section-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+.mp-track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mp-track-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  transition: background 0.12s;
+  border: 1px solid transparent;
+}
+.mp-track-item:hover { background: rgba(255,215,0,0.08); }
+.mp-track-item.active {
+  background: rgba(255,215,0,0.12);
+  border-color: rgba(255,215,0,0.25);
+  color: #FFD700;
+}
+.mp-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+.mp-track-item.active .mp-dot { background: #FFD700; }
+</style>
+
+
+<!-- ================================================
+  PART 2: HTML — apne <body> ke andar paste karo
+  (</body> se thoda pehle best hai)
+================================================ -->
+
+<!-- Play Music Button (agar tumhare paas already hai toh replace karo) -->
+<button id="musicToggleBtn" onclick="toggleMusicPlayer()">
+  🎵 Play Music
+</button>
+
+<!-- Music Player Popup -->
+<div id="musicPlayer">
+  <!-- Track Info + Indicator -->
+  <div class="mp-info-row">
+    <div>
+      <p class="mp-track-name" id="mpTrackName"> Morning</p>
+      <p class="mp-track-sub" id="mpTrackSub">Cozy Jazz Vibes</p>
+    </div>
+    <div class="mp-playing-indicator paused" id="mpIndicator">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="mp-controls">
+    <button class="mp-btn" onclick="mpPrev()" title="Previous">&#9664;&#9664;</button>
+    <button class="mp-play-btn" id="mpPlayBtn" onclick="mpTogglePlay()" title="Play/Pause">
+      &#9654;
+    </button>
+    <button class="mp-btn" onclick="mpNext()" title="Next">&#9654;&#9654;</button>
+  </div>
+
+  <!-- Volume -->
+  <div class="mp-volume-row">
+    <label>🔊</label>
+    <input type="range" min="0" max="100" value="60" step="1"
+           id="mpVolSlider" oninput="mpSetVolume(this.value)">
+    <span class="mp-vol-val" id="mpVolVal">60%</span>
+  </div>
+
+  <!-- Playlist -->
+  <div>
+    <p class="mp-section-label">Playlist</p>
+    <div class="mp-track-list" id="mpTrackList"></div>
+  </div>
+</div>
+
+<!-- Hidden audio element -->
+<audio id="mpAudio" preload="none"></audio>
+
+
+<!-- ================================================
+  PART 3: JAVASCRIPT — </body> se bilkul pehle paste karo
+================================================ -->
+<script>
+  // ── Playlist: three local MP3s + the two existing external tracks ──
+  const mpTracks = [
+    {
+      name: "Drawing Morning",
+      sub:  "Cozy Jazz Vibes",
+      url:  "music/drawing-morning.mp3"
+    },
+    {
+      name: "Rainy",
+      sub:  "Lo-fi Chill Beats",
+      url:  "https://cdn.pixabay.com/download/audio/2022/11/22/audio_febc508520.mp3"
+    },
+    {
+      name: "Hours",
+      sub:  "Smooth Bossa Nova",
+      url:  "music/hours.mp3"
+    },
+    {
+      name: "Afternoons",
+      sub:  "Mellow Acoustic",
+      url:  "https://cdn.pixabay.com/download/audio/2022/08/04/audio_2dde668d05.mp3"
+    },
+    {
+      name: "Midnight",
+      sub:  "Jazz & Piano",
+      url:  "music/midnight.mp3"
+    }
+  ];
+
+  let mpCurrentIdx = 0;
+  let mpIsPlaying  = false;
+  let mpPlayerOpen = false;
+
+  const mpAudio      = document.getElementById('mpAudio');
+  const mpPlayBtn    = document.getElementById('mpPlayBtn');
+  const mpIndicator  = document.getElementById('mpIndicator');
+  const mpTrackName  = document.getElementById('mpTrackName');
+  const mpTrackSub   = document.getElementById('mpTrackSub');
+  const mpVolVal     = document.getElementById('mpVolVal');
+  const mpPlayer     = document.getElementById('musicPlayer');
+  const mpToggleBtn  = document.getElementById('musicToggleBtn');
+
+  mpAudio.volume = 0.6;
+
+  // Open / close the popup
+  function toggleMusicPlayer() {
+    mpPlayerOpen = !mpPlayerOpen;
+    if (mpPlayerOpen) {
+      mpPlayer.classList.add('open');
+      mpToggleBtn.innerHTML = '✖ Close Player';
+      mpRenderList();
+    } else {
+      mpPlayer.classList.remove('open');
+      mpToggleBtn.innerHTML = '🎵 Play Music';
+    }
+  }
+
+  // Play / Pause — UI tabhi playing dikhaye jab audio sach mein start ho
+  function mpTogglePlay() {
+    if (mpIsPlaying) {
+      mpAudio.pause();
+      mpIsPlaying = false;
+      mpUpdateUI();
+      return;
+    }
+
+    if (!mpAudio.src || mpAudio.src === window.location.href) {
+      mpLoadTrack(mpCurrentIdx, false);
+    }
+
+    mpAudio.play().then(() => {
+      mpIsPlaying = true;
+      mpUpdateUI();
+    }).catch((error) => {
+      mpIsPlaying = false;
+      mpUpdateUI();
+      console.error("Music playback failed:", error);
+      alert("Audio play nahi hua. File path ya browser audio access check karo.");
+    });
+  }
+
+  // Load a track
+  function mpLoadTrack(idx, autoplay) {
+    mpCurrentIdx = idx;
+    const t = mpTracks[idx];
+
+    mpAudio.pause();
+    mpIsPlaying = false;
+    mpAudio.src = t.url;
+    mpAudio.load();
+
+    mpTrackName.textContent = t.name;
+    mpTrackSub.textContent  = t.sub;
+    mpRenderList();
+    mpUpdateUI();
+
+    if (autoplay) {
+      mpAudio.play().then(() => {
+        mpIsPlaying = true;
+        mpUpdateUI();
+      }).catch((error) => {
+        mpIsPlaying = false;
+        mpUpdateUI();
+        console.error("Music playback failed:", error);
+        alert("Audio play nahi hua. File path ya browser audio access check karo.");
+      });
+    }
+  }
+
+  // Prev / Next
+  function mpPrev() {
+    mpLoadTrack((mpCurrentIdx - 1 + mpTracks.length) % mpTracks.length, mpIsPlaying);
+  }
+  function mpNext() {
+    mpLoadTrack((mpCurrentIdx + 1) % mpTracks.length, mpIsPlaying);
+  }
+
+  // Volume
+  function mpSetVolume(v) {
+    mpAudio.volume = v / 100;
+    mpVolVal.textContent = v + '%';
+  }
+
+  // Update play button + indicator
+  function mpUpdateUI() {
+    mpPlayBtn.innerHTML    = mpIsPlaying ? '&#9646;&#9646;' : '&#9654;';
+    mpIndicator.classList.toggle('paused', !mpIsPlaying);
+  }
+
+  // Auto next when track ends
+  mpAudio.addEventListener('ended', mpNext);
+
+  // Render playlist
+  function mpRenderList() {
+    const list = document.getElementById('mpTrackList');
+    list.innerHTML = '';
+    mpTracks.forEach((t, i) => {
+      const div = document.createElement('div');
+      div.className = 'mp-track-item' + (i === mpCurrentIdx ? ' active' : '');
+      div.innerHTML = `<span class="mp-dot"></span><span>${t.name}</span>`;
+      div.onclick = () => mpLoadTrack(i, true);
+      list.appendChild(div);
+    });
+  }</script>
+<section id="services">
+
+    <div class="services-bg"></div>
+
+    <div class="services">
+
+        <div class="services-container">
+
+            <!-- SECTION TITLE -->
+            <h1 class="service-title">
+                My <span>Services</span>
+            </h1>
+
+            <!-- SERVICES GRID -->
+            <div class="service-boxes">
+
+                <!-- ================= CARD 1 ================= -->
+                <div class="service-box card-red">
+                    <div class="particles"></div>
+                    <div class="mouse-light"></div>
+
+                    <div class="glow"></div>
+
+                    <div class="icon-circle">
+                        <i class='bx bx-pencil'></i>
+                    </div>
+
+                    <h2>Pencil Portrait Sketches</h2>
+
+                    <p>
+                        Realistic hand-drawn pencil portraits created with professional
+                        graphite pencils, capturing every facial detail with precision
+                        and artistic perfection.
+                    </p>
+
+                    <div class="more-text">
+                        <p>
+                            Every portrait is handcrafted using premium graphite pencils
+                            on high-quality paper with smooth blending, realistic shading,
+                            and fine detailing. Perfect for birthdays, anniversaries,
+                            weddings, gifts, home decoration, and preserving unforgettable
+                            memories with elegant artwork.
+                        </p>
+                    </div>
+
+                    <button type="button" class="btn-box learn-btn">
+    Learn More
+</button>
+
+                </div>
+
+                <!-- ================= CARD 2 ================= -->
+                <div class="service-box card-yellow">
+                    <div class="particles"></div>
+                    <div class="mouse-light"></div>
+
+                    <div class="glow"></div>
+
+                    <div class="icon-circle">
+                        <i class='bx bx-happy-heart-eyes'></i>
+                    </div>
+
+                    <h2>Animal Sketches</h2>
+
+                    <p>
+                        Beautiful custom pet portraits created with realistic fur
+                        textures, expressive eyes, and lifelike pencil detailing
+                        for your beloved companions.
+                    </p>
+
+                    <div class="more-text">
+                        <p>
+                            Whether it's a dog, cat, horse, bird, or any beloved pet,
+                            every artwork is handcrafted with realistic shading,
+                            detailed textures, expressive eyes, and professional
+                            finishing to preserve your precious memories forever.
+                        </p>
+                    </div>
+
+                    <button type="button" class="btn-box learn-btn">
+    Learn More
+</button>
+
+                </div>
+
+                <!-- ================= CARD 3 ================= -->
+                <div class="service-box card-blue">
+                    <div class="particles"></div>
+                    <div class="mouse-light"></div>
+
+                    <div class="glow"></div>
+
+                    <div class="icon-circle">
+                        <i class='bx bx-landscape'></i>
+                    </div>
+
+                    <h2>Nature Artwork</h2>
+
+                    <p>
+                        Elegant landscape sketches featuring mountains,
+                        forests, rivers, flowers, lakes, and peaceful
+                        natural scenery with realistic detailing.
+                    </p>
+
+                    <div class="more-text">
+                        <p>
+                            Every nature artwork is designed using artistic
+                            composition, realistic pencil shading, elegant
+                            detailing, and professional finishing to capture
+                            the beauty of nature in every drawing.
+                        </p>
+                    </div>
+
+                    <button type="button" class="btn-box learn-btn">
+    Learn More
+</button>
+
+                </div>
+
+                <!-- ================= CARD 4 ================= -->
+                <div class="service-box card-green">
+                    <div class="particles"></div>
+                    <div class="mouse-light"></div>
+
+                    <div class="glow"></div>
+
+                    <div class="icon-circle">
+                        <i class='bx bx-palette'></i>
+                    </div>
+
+                    <h2>Custom Art Orders</h2>
+
+                    <p>
+                        Personalized sketches made from your favorite
+                        photographs for birthdays, anniversaries,
+                        weddings, gifts, and unforgettable memories.
+                    </p>
+
+                    <div class="more-text">
+                        <p>
+                            Every custom artwork is designed according to your
+                            personal requirements with premium quality,
+                            realistic detailing, smooth shading, and elegant
+                            finishing to create a timeless masterpiece.
+                        </p>
+                    </div>
+
+                    <button type="button" class="btn-box learn-btn">
+    Learn More
+</button>
+
+                </div>
+
+            </div>
+            <!-- END SERVICES GRID -->
+
+        </div>
+
+    </div>
+
+</section>
+<div id="skills" class="skills-main-wrapper">
+    <h1 class="sub-title">My <span>Skills</span></h1>
+
+    <section id="artists-skills">
+        <div class="artists-bars">
+            <div class="skills-container">
+
+                <h2 class="heading">Artists Skills</h2>
+
+                <!-- Pencil Sketching -->
+                <div class="bar">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Pencil Sketching</span>
+                        <span>90%</span>
+                    </div>
+
+                    <div class="progress" style="height:12px;">
+                        <div class="progress-bar progress-bar-striped bg-info"
+                             role="progressbar"
+                             data-width="90"
+                             style="width:0%"
+                             aria-valuenow="90"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portrait Drawing -->
+                <div class="bar mt-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Portrait Drawing</span>
+                        <span>70%</span>
+                    </div>
+
+                    <div class="progress" style="height:12px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                             role="progressbar"
+                             data-width="70"
+                             style="width: 0%;"
+                             aria-valuenow="70"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shading & Blending -->
+                <div class="bar mt-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shading &amp; Blending</span>
+                        <span>85%</span>
+                    </div>
+
+                    <div class="progress" style="height:12px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                             role="progressbar"
+                             data-width="85"
+                             style="width:0%;"
+                             aria-valuenow="85"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animation Sketching -->
+                <div class="bar mt-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Animation Sketching</span>
+                        <span>60%</span>
+                    </div>
+
+                    <div class="progress" style="height:12px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                             role="progressbar"
+                             data-width="60"
+                             style="width:0%;"
+                             aria-valuenow="60"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="creative-skills">
+
+        <div class="container1">
+            <h2 class="heading">Creative Skills</h2>
+
+            <div class="radial-bars" style="--p:75">
+                <svg viewBox="0 0 200 200">
+                    <circle class="circle-bg" cx="100" cy="100" r="80"></circle>
+                    <circle class="path" cx="100" cy="100" r="80"></circle>
+                </svg>
+                <div class="percentage">75%</div>
+            </div>
+        </div>
+
+        <div class="container1">
+            <h2 class="heading">Patience</h2>
+
+            <div class="radial-bars" style="--p:90;">
+                <svg viewBox="0 0 200 200">
+                    <circle class="circle-bg" cx="100" cy="100" r="80"></circle>
+                    <circle class="path" cx="100" cy="100" r="80"></circle>
+                </svg>
+                <div class="percentage">90%</div>
+            </div>
+        </div>
+
+        <div class="container1">
+            <h2 class="heading">Observation Skills</h2>
+
+            <div class="radial-bars" style="--p:80;">
+                <svg viewBox="0 0 200 200">
+                    <circle class="circle-bg" cx="100" cy="100" r="80"></circle>
+                    <circle class="path" cx="100" cy="100" r="80"></circle>
+                </svg>
+                <div class="percentage">80%</div>
+            </div>
+        </div>
+
+        <div class="container1">
+            <h2 class="heading">Time Management</h2>
+
+            <div class="radial-bars" style="--p:50;">
+                <svg viewBox="0 0 200 200">
+                    <circle class="circle-bg" cx="100" cy="100" r="80"></circle>
+                    <circle class="path" cx="100" cy="100" r="80"></circle>
+                </svg>
+                <div class="percentage">50%</div>
+            </div>
+        </div>
+
+        <div class="container1">
+            <h2 class="heading">Client Communication</h2>
+
+            <div class="radial-bars" style="--p:85;">
+                <svg viewBox="0 0 200 200">
+                    <circle class="circle-bg" cx="100" cy="100" r="80"></circle>
+                    <circle class="path" cx="100" cy="100" r="80"></circle>
+                </svg>
+                <div class="percentage">85%</div>
+            </div>
+        </div>
+
+    </section>
+</div>
+<section id="sketches" class="sketches-section">
+
+    <div class="kajal-heading-wrap">
+        <div class="kajal-dropdown" id="kajalDropdown">
+            <a href="#sketches" class="kajal-dropbtn gold-text">🎨 Kajal's Sketches ▼</a>
+
+            <div class="kajal-dropdown-content">
+                <a href="#sketches">✏️ Pencil Sketches</a>
+                <a href="#colorpaintings">🎨 Color Paintings</a>
+                <a href="#crafts">🛠️ Crafts</a>
+                <a href="#divine-art">🕉️ Wall Art &amp; God Paintings</a>
+            </div>
+        </div>
+
+        <h2 class="gold-text" style="margin-top: 20px;">✏️ Pencil Portfolio Sketches</h2>
+    </div>
+
+<p class="color-para">
+Experience the timeless beauty of pencil artistry through realistic portraits crafted with precision, smooth shading, and intricate detailing. Every sketch is carefully handmade with passion and creativity, transforming simple graphite strokes into elegant masterpieces that preserve unforgettable memories.
+</p>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches1.jpeg" alt="Sketch 1">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="1">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-1">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches2.jpeg" alt="Sketch 2">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="2">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-2">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches3.jpeg" alt="Sketch 3">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="3">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-3">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches4.jpeg" alt="Sketch 4">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="4">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-4">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches5.jpeg" alt="Sketch 5">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="5">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-5">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches6.jpeg" alt="Sketch 6">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="6">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-6">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches7.jpeg" alt="Sketch 7">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="7">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-7">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches8.jpeg" alt="Sketch 8">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="8">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-8">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches9.jpeg" alt="Sketch 9">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="9">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-9">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches10.jpeg" alt="Sketch 10">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="10">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-10">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches11.jpeg" alt="Sketch 11">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="11">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-11">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches12.jpeg" alt="Sketch 12">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="12">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-12">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches13.jpeg" alt="Sketch 13">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="13">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-13">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches14.jpeg" alt="Sketch 14">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="14">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-14">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches15.jpeg" alt="Sketch 15">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="15">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-15">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches16.jpeg" alt="Sketch 16">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="16">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-16">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches17.jpeg" alt="Sketch 17">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="17">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-17">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches18.jpeg" alt="Sketch 18">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="18">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-18">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches19.jpeg" alt="Sketch 19">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">CHARCOAL SKETCH</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="19">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-19">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches20.jpeg" alt="Sketch 20">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="20">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-20">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    <div class="sketch-grid">
+
+        <div class="sketch-card">
+
+    <img src="sketches21.jpeg" alt="Sketch 21">
+
+    <div class="sketch-info">
+        <h3 class="gold-title">Portrait Sketch</h3>
+        <p class="sketch-desc">
+    Handmade Pencil Portrait with realistic shading and premium detailing.
+</p>
+
+        <button class="like-btn" data-id="21">
+            ❤️ Like
+        </button>
+
+        <div class="like-box">
+            👍 Likes :
+            <span class="like-count" id="like-count-21">0</span>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+    
+
+    </div>
+    <section id="colorpaintings" class="color-section">
+
+<h2>
+🎨 <span class="color-title">Color Painting Portfolio</span>
+</h2>
+
+<p class="color-para">
+Experience the beauty of vibrant colors blended with creativity and imagination. Every artwork is carefully hand-painted using premium colors, bringing portraits and artistic visions to life with rich textures and elegant finishing.
+</p>
+
+<div class="sketch-grid">
+
+<div class="sketch-card color-card">
+
+<img src="colorpainting1.jpeg" alt="Color Painting 1">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+Royal Color Portrait
+</h3>
+
+<p class="sketch-desc">
+A premium handmade color painting crafted with vibrant shades, smooth blending, realistic textures and museum-quality finishing.
+</p>
+
+<button class="like-btn" data-id="101">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-101">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card color-card">
+
+<img src="colorpainting2.jpeg" alt="Color Painting 2">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+Royal Color Portrait- ACRYLIC ON CANVAS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade color painting crafted with vibrant shades, smooth blending, realistic textures and museum-quality finishing.
+</p>
+
+<button class="like-btn" data-id="102">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-102">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card color-card">
+
+<img src="colorpainting3.jpeg" alt="Color Painting 3">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+Royal Color Portrait- ACRYLIC ON CANVAS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade color painting crafted with vibrant shades, smooth blending, realistic textures and museum-quality finishing.
+</p>
+
+<button class="like-btn" data-id="103">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-103">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card color-card">
+
+<img src="colorpainting4.jpeg" alt="Color Painting 4">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+Royal Color Portrait
+</h3>
+
+<p class="sketch-desc">
+A premium handmade color painting crafted with vibrant shades, smooth blending, realistic textures and museum-quality finishing.
+</p>
+
+<button class="like-btn" data-id="104">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-104">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="shading7.jpeg" alt="shading 7">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- mobile cover paintings SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="109">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-109">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<section id="crafts" class="crafts-section">
+
+<h2>
+🛠️ <span class="craft-text">Handmade Crafts</span>
+</h2>
+
+<p class="craft-para">
+Explore a beautiful collection of handmade crafts created with creativity, patience, and passion. Every piece is carefully designed using premium materials and artistic techniques, transforming simple ideas into elegant decorative masterpieces that add beauty, charm, and uniqueness to every space.
+</p>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts1.jpeg" alt="Craft 1">
+
+<div class="sketch-info">
+<h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="201">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-201">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts2.jpeg" alt="Craft 2">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="202">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-202">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts3.jpeg" alt="Craft 3">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="203">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-203">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts4.jpeg" alt="Craft 4">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+ CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="204">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-204">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts5.jpeg" alt="Craft 5">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="205">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-205">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts6.jpeg" alt="Craft 6">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="206">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-206">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts7.jpeg" alt="Craft 7">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="207">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-207">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts8.jpeg" alt="Craft 8">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="208">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-208">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts9.jpeg" alt="Craft 9">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="209">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-209">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts10.jpeg" alt="Craft 10">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="210">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-210">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card craft-card">
+
+<img src="crafts11.jpeg" alt="Craft 11">
+
+<div class="sketch-info">
+  <h3 class="color-heading">
+CREATIVE RUKWAT(CRAFTS)
+</h3>
+
+<p class="craft-para">
+Discover beautifully handcrafted creations made with creativity, precision, and passion. Every craft is carefully designed using premium materials, transforming simple ideas into elegant decorative masterpieces that reflect artistic excellence and unique craftsmanship.
+</p>
+
+<button class="like-btn" data-id="211">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-211">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<section id="divine-art" class="divine-section">
+
+<h2>
+🕉️ <span class="gold-text">Wall Art, Rangoli & God Paintings</span>
+</h2>
+
+<p class="divine-para">
+Celebrate spirituality and creativity through beautiful wall art, traditional rangoli designs, and divine God paintings. Each artwork is handcrafted with devotion, vibrant colors, and intricate detailing, bringing positivity, elegance, and cultural beauty into every home and sacred space.
+</p>
+
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="oiloncanvas.jpeg" alt="God Painting 1">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- OIL ON CANVAS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="301">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-301">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="god2.jpeg" alt="God Painting 2">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="302">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-302">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="shading1.jpeg" alt="shading 1">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="303">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-303">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="shading2.jpeg" alt="shading 2">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="304">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-304">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="shading3.jpeg" alt="shading 3">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="305">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-305">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="shading4.jpeg" alt="shading 4">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="306">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-306">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="shading5.jpeg" alt="shading 5">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="307">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-307">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="shading6.jpeg" alt="shading 6">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="308">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-308">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="god3.jpeg" alt="God Painting 3">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="309">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-309">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="god4.jpeg" alt="God Painting 4">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection-WALL PAINTINGS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="310">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-310">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="wallpainting1.jpeg" alt="wall Painting 1">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection-WALL PAINTINGS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="311">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-311">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="wallpainting2.jpeg" alt="wall Painting 2">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection-WALL PAINTINGS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="312">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-312">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="wallpainting3.jpeg" alt="wall Painting 3">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection-WALL PAINTINGS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="313">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-313">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="wallpainting4.jpeg" alt="wall Painting 4">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection-WALL PAINTINGS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="314">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-314">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="bookmark5.jpeg" alt="God Painting 5">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- BOOKMARKS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="316">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-316">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="bookmark6.jpeg" alt="God Painting 6">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- BOOKMARKS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="317">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-317">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="god7.jpeg" alt="God Painting 7">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- ACRYLIC ON CANVAS
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="318">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-318">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="sketch-grid">
+
+<div class="sketch-card divine-card">
+
+<img src="god8.jpeg" alt="God Painting 8">
+
+<div class="sketch-info">
+
+<h3 class="color-heading">
+✨ Divine Art Collection- RANGOLI SKETCH
+</h3>
+
+<p class="sketch-desc">
+A premium handmade artwork featuring sacred themes, decorative wall designs, and colorful rangoli patterns, created with precision and artistic excellence to inspire peace, faith, and timeless beauty.
+</p>
+
+<button class="like-btn" data-id="319">
+❤️ Like
+</button>
+
+<div class="like-box">
+👍 Likes :
+<span class="like-count" id="like-count-319">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+</section>
+</section>    
+       
+ <section>
+  <div id="portfolio" id="project">
+ <div id="project">
+    <div class="main-text">
+    <h3>My</h3>
+    <h2>PORTFOLIO</h2>
+    <div class="title-line"></div>
+
+
+      <div class="portfolio-content">
+
+  <div class="row">
+    <img src="portfolio1.jpeg" alt="Portfolio 1">
+    <div class="layer">
+      <h5>Sketch Art</h5>
+      <p>Realistic pencil sketch artwork.</p>
+      <a href="#"><i class='bx bx-link-external' style="color: aliceblue;"></i></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <img src="portfolio2.jpeg" alt="Portfolio 2">
+    <div class="layer">
+      <h5>Portrait Design- ACRYLIC ON CANVAS</h5>
+      <p>Detailed human portrait sketch.</p>
+      <a href="#"><i class='bx bx-link-external' style="color: aliceblue;"></i></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <img src="portfolio3.jpeg" alt="Portfolio 3">
+    <div class="layer">
+      <h5>Nature Art</h5>
+      <p>Creative nature-inspired drawing.</p>
+      <a href="#"><i class='bx bx-link-external' style="color: aliceblue;"></i></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <img src="portfolio4.jpeg" alt="Portfolio 4">
+    <div class="layer">
+      <h5>Human art</h5>
+      <p>Expressive handmade human artwork capturing natural posture, emotion, and fine artistic detail.</p>
+      <a href="#"><i class='bx bx-link-external' style="color: aliceblue;"></i></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <img src="portfolio5.jpeg" alt="Portfolio 5">
+    <div class="layer">
+      <h5>God Artwork</h5>
+      <p>Sacred and serene devotional artwork crafted with devotion, spiritual grace, and intricate detailing.</p>
+      <a href="#"><i class='bx bx-link-external' style="color: aliceblue;"></i></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <img src="portfolio6.jpeg" alt="Portfolio 6">
+    <div class="layer">
+      <h5>Nature Art</h5>
+      <p>Peaceful nature-inspired artwork blending scenic surroundings and traditional temple charm with delicate strokes.</p>
+      <a href="#"><i class='bx bx-link-external' style="color: aliceblue;"></i></a>
+    </div>
+  </div>
+
+</div>
+    </div>
+    </div>
+  </div>
+</section> 
+<section class="gallery" id="gallery" id="gallery" aria-label="Art Gallery">
+    <div class="studio-wall-texture"></div>
+    <div class="studio-spotlights">
+        <div class="light-beam"></div>
+        <div class="light-beam"></div>
+        <div class="light-beam"></div>
+    </div>
+    <div class="particles-container" id="particlesContainer"></div>
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <div class="gallery-heading scroll-reveal">
+        <span>OUR CREATIVE</span>
+        <h2>MASTERPIECE GALLERY</h2>
+        <p>
+            Discover hand-crafted pencil sketches, colorful paintings, and unique crafts.
+            Click any artwork to experience every detail in full-screen.
+        </p>
+    </div>
+
+    <div class="gallery-filters scroll-reveal" role="tablist" aria-label="Filter Artwork">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="filter-btn" data-filter="pencil" role="tab" aria-selected="false">Pencil</button>
+        <button class="filter-btn" data-filter="color" role="tab" aria-selected="false">Color</button>
+        <button class="filter-btn" data-filter="crafts" role="tab" aria-selected="false">Crafts</button>
+    </div>
+
+    <div class="gallery-container">
+        
+        <div class="gallery-item skeleton scroll-reveal" data-category="pencil" data-tilt>
+            <img data-src="sketches22.jpeg" alt="Pencil Sketch 1" class="lazy-img">
+            <div class="gallery-overlay">
+                <h3>Pencil Sketch</h3>
+                <span>Click to View</span>
+            </div>
+        </div>
+
+        <div class="gallery-item skeleton scroll-reveal" data-category="pencil" data-tilt>
+            <img data-src="sketches23.jpeg" alt="Pencil Sketch 2" class="lazy-img">
+            <div class="gallery-overlay">
+                <h3>Pencil Sketch</h3>
+                <span>Click to View</span>
+            </div>
+        </div>
+
+        <div class="gallery-item skeleton scroll-reveal" data-category="pencil" data-tilt>
+            <img data-src="sketches24.jpeg" alt="Pencil Sketch 3" class="lazy-img">
+            <div class="gallery-overlay">
+                <h3>Pencil Sketch</h3>
+                <span>Click to View</span>
+            </div>
+        </div>
+
+        <div class="gallery-item skeleton scroll-reveal" data-category="color" data-tilt>
+            <img data-src="colorpainting5.jpeg" alt="Color Painting 1" class="lazy-img">
+            <div class="gallery-overlay">
+                <h3>Color Painting</h3>
+                <span>Click to View</span>
+            </div>
+        </div>
+
+        <div class="gallery-item skeleton scroll-reveal" data-category="color" data-tilt>
+            <img data-src="colorpainting6.jpeg" alt="Color Painting 2" class="lazy-img">
+            <div class="gallery-overlay">
+                <h3>Color Painting</h3>
+                <span>Click to View</span>
+            </div>
+        </div>
+
+        <div class="gallery-item skeleton scroll-reveal" data-category="crafts" data-tilt>
+            <img data-src="colorpainting7.jpeg" alt="Creative Craft 1" class="lazy-img">
+            <div class="gallery-overlay">
+                <h3>Handmade Craft</h3>
+                <span>Click to View</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+        <button class="gallery-close" id="galleryClose" aria-label="Close Lightbox">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous Image">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="gallery-lightbox-content" id="lightboxSwipeArea">
+            <img src="" alt="Artwork Preview" id="galleryPreview">
+            <div class="gallery-caption">
+                <h3 id="galleryTitle"></h3>
+                <p>Artwork Preview</p>
+            </div>
+        </div>
+
+        <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next Image">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+</section>
+
+
+<!-- =========================
+      STUDENT TESTIMONIALS
+========================== -->
+
+<section id="testimonials" class="testimonials-section">
+
+    <div class="container">
+
+        <h2 class="testimonial-heading">
+            🌟 Student Testimonials
+        </h2>
+
+        <p class="testimonial-subheading">
+            Every artwork tells a story. Here's what my wonderful students have to say about their creative journey.
+        </p>
+
+        <div id="testimonialCarousel"
+             class="carousel slide"
+             data-bs-ride="carousel"
+             data-bs-interval="4500">
+
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="4"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="5"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="6"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="7"></button>
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+
+                <!-- Student 1 -->
+                <div class="carousel-item active">
+
+                    <div class="testimonial-card">
+
+                        <img src="students1.jpeg"
+                             class="student-image"
+                             alt="Student 1">
+
+                        <h3 class="student-name">
+                            Aarav Patil
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <p class="student-review">
+                            Joining Kajal Ma'am's art classes completely changed my drawing skills. Every lesson is enjoyable, creative and easy to understand.
+                        </p>
+
+                        <p class="student-role">
+                            Class 8 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Student 2 -->
+                <div class="carousel-item">
+
+                    <div class="testimonial-card">
+
+                        <img src="students2.jpeg"
+                             class="student-image"
+                             alt="Student 2">
+
+                        <h3 class="student-name">
+                            Riya Sharma
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐☆
+                        </div>
+
+                        <p class="student-review">
+                            I learned beautiful shading techniques and improved my confidence in sketching. Every class feels inspiring.
+                        </p>
+
+                        <p class="student-role">
+                            Class 8 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Student 3 -->
+                <div class="carousel-item">
+
+                    <div class="testimonial-card">
+
+                        <img src="students3.jpeg"
+                             class="student-image"
+                             alt="Student 3">
+
+                        <h3 class="student-name">
+                            Soham Kale
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐☆
+                        </div>
+
+                        <p class="student-review">
+                            The personal guidance helped me improve much faster. My artwork has become cleaner and more detailed.
+                        </p>
+
+                        <p class="student-role">
+                            Class 8 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Student 4 -->
+                <div class="carousel-item">
+
+                    <div class="testimonial-card">
+
+                        <img src="students4.jpeg"
+                             class="student-image"
+                             alt="Student 4">
+
+                        <h3 class="student-name">
+                            Sneha Deshmukh
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐☆
+                        </div>
+
+                        <p class="student-review">
+                            Wonderful learning experience. The classes motivated me to practice regularly and improve every week.
+                        </p>
+
+                        <p class="student-role">
+                            Class 8 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+                               <!-- Student 5 -->
+                <div class="carousel-item">
+
+                    <div class="testimonial-card">
+
+                        <img src="students5.jpeg"
+                             class="student-image"
+                             alt="Student 5">
+
+                        <h3 class="student-name">
+                            Yash More
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <p class="student-review">
+                            Excellent teaching style and friendly environment. I now enjoy creating sketches and paintings with much more confidence.
+                        </p>
+
+                        <p class="student-role">
+                            Class 8 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Student 6 -->
+                <div class="carousel-item">
+
+                    <div class="testimonial-card">
+
+                        <img src="students6.jpeg"
+                             class="student-image"
+                             alt="Student 6">
+
+                        <h3 class="student-name">
+                            Anaya Joshi
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐☆
+                        </div>
+
+                        <p class="student-review">
+                            Every class introduced something new. The creativity and encouragement helped me become a better artist.
+                        </p>
+
+                        <p class="student-role">
+                            Class 8 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Student 7 -->
+                <div class="carousel-item">
+
+                    <div class="testimonial-card">
+
+                        <img src="students7.jpeg"
+                             class="student-image"
+                             alt="Student 7">
+
+                        <h3 class="student-name">
+                            Aditya Kulkarni
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <p class="student-review">
+                            Kajal Ma'am always motivates us to try new ideas. My confidence in drawing has improved a lot.
+                        </p>
+
+                        <p class="student-role">
+                            Class 9 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Student 8 -->
+                <div class="carousel-item">
+
+                    <div class="testimonial-card">
+
+                        <img src="students8.jpeg"
+                             class="student-image"
+                             alt="Student 8">
+
+                        <h3 class="student-name">
+                            Priya Wankhede
+                        </h3>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <p class="student-review">
+                            Amazing experience! I learned sketching, shading and painting in a fun way. Highly recommended for every art lover.
+                        </p>
+
+                        <p class="student-role">
+                            Class 10 Student • Nagpur
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Previous Button -->
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#testimonialCarousel"
+                    data-bs-slide="prev">
+
+                <span class="carousel-control-prev-icon"></span>
+
+            </button>
+
+            <!-- Next Button -->
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#testimonialCarousel"
+                    data-bs-slide="next">
+
+                <span class="carousel-control-next-icon"></span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="contact" id="contact">
+  <div class="contact-text">
+    <h3>Contact <span>Me</span></h3>
+    <h4>Let's Work Together</h4>
+
+    <p>
+      Have an idea or want a custom pencil sketch? Feel free to contact me.
+      I'll be happy to create beautiful artwork for you.
+    </p>
+
+    <div class="contact-list">
+      <li><i class='bx bx-send' style='color:#00eeff'></i> contact@gmail.com</li>
+      <li><i class='bx bx-phone' style='color:#00eeff'></i> +91 12345 67890</li>
+    </div>
+
+    
+
+<div class="contact-icons">
+
+    <a href="https://facebook.com/kajalnakashesketches" target="_blank">
+        <i class="fa-brands fa-facebook-f" style="color:#1877F2"></i>
+    </a>
+
+    <a href="https://twitter.com/kajalnakashe" target="_blank">
+        <i class="fa-brands fa-twitter" style="color:#1DA1F2"></i>
+    </a>
+
+    <a href="https://instagram.com/kajalchandrakantnakashe" target="_blank">
+        <i class="fa-brands fa-instagram" style="color:#E4405F"></i>
+    </a>
+
+    <a href="https://linkedin.com/in/kajalnakashe" target="_blank">
+        <i class="fa-brands fa-linkedin-in" style="color:#0A66C2"></i>
+    </a>
+
+    <!-- GOOGLE -->
+    <a href="https://google.com" target="_blank">
+        <svg class="brand-logo" viewBox="0 0 48 48">
+            <path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+            <path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.1c-1.8 1.2-4.1 2-6.8 2-5.2 0-9.6-3.5-11.2-8.2H5.9v5.3A20 20 0 0 0 24 44z"/>
+            <path fill="#FBBC05" d="M12.8 27.8a12 12 0 0 1 0-7.6v-5.3H5.9a20 20 0 0 0 0 18.2z"/>
+            <path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3.1l5.8-5.8C34.1 6.1 29.5 4 24 4A20 20 0 0 0 5.9 14.9l6.9 5.3c1.6-4.7 6-8.1 11.2-8.1z"/>
+        </svg>
+    </a>
+
+    <!-- CHROME -->
+    <a href="https://www.google.com/chrome/" target="_blank">
+        <svg class="brand-logo" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="22" fill="#EA4335"/>
+            <path d="M24 24 L45.5 24 A22 22 0 0 1 13 43 Z" fill="#FBBC05"/>
+            <path d="M24 24 L13 43 A22 22 0 0 1 3 13 Z" fill="#34A853"/>
+            <circle cx="24" cy="24" r="10.5" fill="#4285F4"/>
+            <circle cx="24" cy="24" r="10.5" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+        </svg>
+    </a>
+
+    <a href="https://wa.me/918830396883" target="_blank">
+        <i class="fa-brands fa-whatsapp" style="color:#25D366"></i>
+    </a>
+
+    <a href="https://youtube.com/@kajalnakashesketches" target="_blank">
+        <i class="fa-brands fa-youtube" style="color:#FF0000"></i>
+    </a>
+
+</div>
+
+
+  </div>
+
+  <div class="contact-form">
+  <form id="contact-form">
+
+    <div class="input-box">
+        <label>Enter Your Name</label>
+        <input
+type="text"
+id="name"
+name="name"
+placeholder="John Doe"
+required>
+    </div>
+
+    <div class="input-box">
+        <label>Email Address</label>
+        <input
+type="email"
+id="email"
+name="email"
+placeholder="example@gmail.com"
+required>
+    </div>
+
+    <div class="input-box">
+        <label>Phone Number</label>
+        <input
+type="tel"
+id="phone"
+name="phone">
+    </div>
+
+    <div class="input-box">
+        <label>Address</label>
+        <input
+type="text"
+id="address"
+name="address">
+    </div>
+
+    <div class="input-box">
+        <label>Artwork Type</label>
+
+        <select id="artwork"
+name="artwork">
+            <option>Pencil Sketch</option>
+            <option>Portrait</option>
+            <option>Nature Art</option>
+            <option>Digital Art</option>
+            <option>Custom Artwork</option>
+        </select>
+        
+    </div>
+
+    <div class="input-box">
+        <label>Budget</label>
+        <input
+type="number"
+id="budget"
+name="budget">
+    </div>
+
+    <div class="input-box">
+        <label>Delivery Date</label>
+        <input
+type="date"
+id="delivery"
+name="delivery">
+    </div>
+
+    <div class="input-box">
+    <label>Upload Reference Image</label>
+    <input
+        type="file"
+        id="reference_image"
+        name="reference_image"
+        accept="image/jpeg,image/png,image/webp"
+        required>
+</div>
+
+
+
+    <div class="input-box">
+        <label>Subject</label>
+        <input
+type="text"
+id="subject"
+name="subject">
+    </div>
+
+    <div class="input-box">
+        <label>Your Message</label>
+        <textarea
+id="message"
+name="message"></textarea>
+    </div>
+
+    <div class="input-box">
+        <label>Rate My Portfolio</label>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+    </div>
+
+    <div class="btn-box">
+        <input type="submit" value="Submit" class="send">
+        <input type="reset" value="Reset" class="send">
+    </div>
+    
+</form>
+</div>
+<script>
+    emailjs.init({
+        publicKey: "1LlqnjxCb6ndaczgB"
+    });
+</script>
+</section>
+
+
+</body>
+</html>
+
+<!-- =================== PREMIUM FOOTER START =================== -->
+
+<footer class="footer-section">
+
+    <!-- Animated Top Border -->
+    <div class="footer-top-line"></div>
+
+    <div class="container">
+
+        <div class="row gy-5">
+
+            <!-- About -->
+            <div class="col-lg-4 col-md-6">
+
+                <div class="footer-logo">
+
+                    <h2>Kajal <span>Nakashe</span></h2>
+
+                    <h5>Sketch Artist | Portrait Artist</h5>
+
+                </div>
+
+                <p class="footer-about">
+
+                    Every sketch tells a story.
+                    I transform your memories into timeless
+                    handmade pencil sketches, portraits,
+                    wall paintings and creative artworks.
+
+                </p>
+
+              
+<div class="contact-icons">
+
+    <!-- Facebook -->
+    <a href="https://facebook.com/kajalnakashesketches" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <!-- Twitter -->
+    <a href="https://twitter.com/kajalnakashe" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-twitter"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://instagram.com/kajalchandrakantnakashe" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/in/kajalnakashe" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+
+    <!-- Google -->
+    <a href="https://google.com" target="_blank" rel="noopener noreferrer">
+        <svg class="brand-logo" viewBox="0 0 48 48">
+            <path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+            <path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.1c-1.8 1.2-4.1 2-6.8 2-5.2 0-9.6-3.5-11.2-8.2H5.9v5.3A20 20 0 0 0 24 44z"/>
+            <path fill="#FBBC05" d="M12.8 27.8a12 12 0 0 1 0-7.6v-5.3H5.9a20 20 0 0 0 0 18.2z"/>
+            <path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3.1l5.8-5.8C34.1 6.1 29.5 4 24 4A20 20 0 0 0 5.9 14.9l6.9 5.3c1.6-4.7 6-8.1 11.2-8.1z"/>
+        </svg>
+    </a>
+
+    <!-- Chrome -->
+    <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">
+        <svg class="brand-logo" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="22" fill="#EA4335"/>
+            <path d="M24 24 L45.5 24 A22 22 0 0 1 13 43 Z" fill="#FBBC05"/>
+            <path d="M24 24 L13 43 A22 22 0 0 1 3 13 Z" fill="#34A853"/>
+            <circle cx="24" cy="24" r="10.5" fill="#4285F4"/>
+            <circle cx="24" cy="24" r="10.5" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+        </svg>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/918830396883" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@kajalnakashesketches" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+
+</div>
+
+
+            </div>
+
+            <!-- Quick Links -->
+
+            <div class="row footer-links">
+
+  <div class="col-lg-3 col-md-6">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#sketches">Sketches</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#creative-skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+</div>
+
+            <!-- Services -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h4>My Services</h4>
+
+                <ul>
+
+                    <li>Pencil Sketch</li>
+
+                    <li>Portrait Sketch</li>
+
+                    <li>Wall Painting</li>
+
+                    <li>Craft Art</li>
+
+                    <li>Drawing Classes</li>
+
+                    <li>Custom Artwork</li>
+
+                </ul>
+
+            </div>
+
+            <!-- Contact -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h4>Contact</h4>
+
+                <ul class="contact-info">
+
+                    <li>
+
+                        <i class='bx bx-map'></i>
+
+                        Nagpur, Maharashtra
+
+                    </li>
+
+                    <li>
+
+                        <i class='bx bx-envelope'></i>
+
+                        kajal@example.com
+
+                    </li>
+
+                    <li>
+
+                        <i class='bx bx-phone'></i>
+
+                        +91 XXXXX XXXXX
+
+                    </li>
+
+                    <li>
+
+                        <i class='bx bx-time'></i>
+
+                        Mon - Sun
+
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- Why Choose Us -->
+<div class="col-lg-3 col-md-6">
+
+    <h4>Why Choose Me</h4>
+
+    <ul class="why-choose">
+        <li><i class='bx bx-check-circle'></i> 100% Handmade Sketches</li>
+        <li><i class='bx bx-check-circle'></i> Premium Quality</li>
+        <li><i class='bx bx-check-circle'></i> Affordable Price</li>
+        <li><i class='bx bx-check-circle'></i> Fast Delivery</li>
+        <li><i class='bx bx-check-circle'></i> Custom Artwork</li>
+        <li><i class='bx bx-check-circle'></i> Customer Satisfaction</li>
+    </ul>
+
+    <div class="working-hours">
+        <h5>Working Hours</h5>
+        <p>🕘 Monday - Sunday</p>
+        <p>09:00 AM - 09:00 PM</p>
+    </div>
+</div>
+        </div>
+
+        <hr>
+
+        <!-- Quote -->
+
+        <div class="footer-quote">
+
+            <h4>
+
+                "Turning Memories Into Timeless Sketches with strokes."
+
+            </h4>
+
+        </div>
+
+        <hr>
+
+        <!-- Copyright -->
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 Kajal Nakashe | All Rights Reserved.
+
+            </p>
+
+            <p>
+
+                Designed & Developed with ❤️ by
+
+                <span>Vignesh Nakashe</span>
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Scroll Top -->
+
+    <button id="scrollTop">
+
+        <i class='bx bx-chevrons-up'></i>
+
+    </button>
+    
+
+</footer>
+
+<!-- =================== PREMIUM FOOTER END =================== -->
+
+<div class="last-text">
+  <p>Developed with love and hardwork by VIGNESH C NAKASHE that is vcn43proiller vers</p>
+<a href="#" class="top"><i class='bx bx-up-arrow-alt'></i></a>
+</div>
+<script>
+
+/*=========================================
+      TESTIMONIALS - LUXURY JS
+=========================================*/
+const testimonialCarousel = document.querySelector('#testimonialCarousel');
+
+if (testimonialCarousel) {
+
+    const carousel = new bootstrap.Carousel(testimonialCarousel, {
+        interval: 4500,
+        ride: 'carousel',
+        pause: 'hover',
+        wrap: true,
+        keyboard: true
+    });
+
+    testimonialCarousel.addEventListener('slide.bs.carousel', () => {
+        document.querySelectorAll('.testimonial-card').forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+        });
+    });
+
+    testimonialCarousel.addEventListener('slid.bs.carousel', () => {
+        document.querySelectorAll('.testimonial-card').forEach(card => {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+        });
+    });
+
+}
+
+</script>
+
+<!-- ===== Dark / Light Mode Toggle Logic ===== -->
+<script>
+(function () {
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const knob = themeBtn.querySelector('.toggle-knob');
+
+    function applyTheme(isDark) {
+        document.body.classList.toggle('dark-mode', isDark);
+        knob.textContent = isDark ? '🌙' : '☀️';
+        localStorage.setItem('kajalSiteTheme', isDark ? 'dark' : 'light');
+    }
+
+    // restore saved preference on load (default = original/light)
+    const saved = localStorage.getItem('kajalSiteTheme');
+    applyTheme(saved === 'dark');
+
+    themeBtn.addEventListener('click', function () {
+        applyTheme(!document.body.classList.contains('dark-mode'));
+    });
+})();
+
+</script>
+<script>
+async function checkLoginStatus(){
+    const signinBtn = document.getElementById("signinBtn");
+    const userMenu = document.getElementById("userMenu");
+    const avatar = document.getElementById("userAvatar");
+    const dropdown = document.getElementById("userDropdown");
+
+    try{
+        const response = await fetch("auth_status.php", {
+            credentials: "same-origin",
+            cache: "no-store"
+        });
+        const data = await response.json();
+
+        if(data.loggedIn && data.user){
+            if(signinBtn) signinBtn.style.display = "none";
+
+            if(userMenu){
+                userMenu.style.display = "block";
+                userMenu.style.position = "fixed";
+                userMenu.style.top = "56px";
+                userMenu.style.right = "18px";
+                userMenu.style.zIndex = "3002";
+            }
+
+            if(avatar){
+                avatar.style.display = "flex";
+                avatar.title = data.user.name;
+                avatar.innerHTML = data.user.name.trim().charAt(0).toUpperCase() || "U";
+            }
+
+            if(dropdown){
+                dropdown.innerHTML = `
+                    <button onclick="goToDashboard()"><i class="fa-solid fa-user"></i> My Account</button>
+                    <button onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                `;
+            }
+        }else{
+            if(signinBtn) signinBtn.style.display = "inline-flex";
+            if(userMenu) userMenu.style.display = "none";
+            if(avatar) avatar.style.display = "none";
+        }
+    }catch(error){
+        if(signinBtn) signinBtn.style.display = "inline-flex";
+        if(userMenu) userMenu.style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    const avatar = document.getElementById("userAvatar");
+
+    if(avatar){
+        avatar.onclick = function(event){
+            event.stopPropagation();
+            const menu = document.getElementById("userDropdown");
+            if(menu) menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        };
+    }
+
+    document.addEventListener("click", function(event){
+        const menu = document.getElementById("userDropdown");
+        const avatar = document.getElementById("userAvatar");
+
+        if(menu && menu.style.display === "block"){
+            if(!avatar.contains(event.target) && !menu.contains(event.target)){
+                menu.style.display = "none";
+            }
+        }
+    });
+
+    checkLoginStatus();
+});
+
+function goToDashboard(){
+    window.location.href = "dashboard.php";
+}
+
+function logout(){
+    window.location.href = "logout.php";
+}
+</script>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script src="gallery.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const kajalDrop = document.getElementById("kajalDropdown");
+    if (!kajalDrop) return;
+    const btn = kajalDrop.querySelector(".kajal-dropbtn");
+
+    btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        kajalDrop.classList.toggle("open");
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!kajalDrop.contains(e.target)) {
+            kajalDrop.classList.remove("open");
+        }
+    });
+});
+</script>
+</body>
+</html>
