@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | Gurujal Art Studio</title>
+    <meta name="description" content="Create your Gurujal Art Studio account.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #071315;
+            --panel: rgba(13, 31, 33, 0.92);
+            --cyan: #45e6d0;
+            --gold: #e6c77a;
+            --white: #f4f7f6;
+            --muted: #9eafad;
+            --border: rgba(69, 230, 208, 0.20);
+            --error: #ff8989;
+            --success: #73edb0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 16px;
+            overflow-x: hidden;
+            font-family: "Poppins", sans-serif;
+            color: var(--white);
+            background:
+                radial-gradient(ellipse at 15% 15%,
+                    rgba(28, 155, 145, 0.17), transparent 42%),
+                radial-gradient(ellipse at 85% 85%,
+                    rgba(190, 148, 57, 0.12), transparent 38%),
+                var(--bg);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.18;
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 42px 42px;
+        }
+
+        .signup-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 465px;
+            padding: 38px;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            background: var(--panel);
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.38),
+                0 0 35px rgba(69, 230, 208, 0.045);
+            backdrop-filter: blur(18px);
+            animation: appear 0.65s ease both;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 27px;
+        }
+
+        .brand-mark {
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 13px;
+            border: 1px solid rgba(230, 199, 122, 0.55);
+            border-radius: 19px;
+            color: var(--gold);
+            font-family: "Cormorant Garamond", serif;
+            font-size: 31px;
+            font-weight: 700;
+            background: rgba(230, 199, 122, 0.06);
+            box-shadow: 0 0 25px rgba(230, 199, 122, 0.07);
+        }
+
+        .brand h1 {
+            color: var(--gold);
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(28px, 6vw, 36px);
+            letter-spacing: 1px;
+            line-height: 1.15;
+        }
+
+        .brand p {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .heading h2 {
+            font-size: 23px;
+            font-weight: 500;
+        }
+
+        .heading p {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #dbe7e4;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-wrap input {
+            width: 100%;
+            min-height: 49px;
+            padding: 13px 45px 13px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 11px;
+            outline: none;
+            background: rgba(3, 14, 15, 0.62);
+            color: var(--white);
+            font-family: inherit;
+            font-size: 13px;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .input-wrap input::placeholder {
+            color: #6f8581;
+        }
+
+        .input-wrap input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(69, 230, 208, 0.09);
+        }
+
+        .input-wrap input:focus:invalid:not(:placeholder-shown) {
+            border-color: var(--error);
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            padding: 5px;
+            border: none;
+            background: transparent;
+            color: var(--cyan);
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .toggle-password:hover {
+            color: var(--gold);
+        }
+
+        .password-hint {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 5px 0 20px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .terms input {
+            margin-top: 4px;
+            accent-color: var(--cyan);
+            flex-shrink: 0;
+        }
+
+        .terms a,
+        .footer a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+
+        .terms a:hover,
+        .footer a:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            border: none;
+            border-radius: 11px;
+            color: #061514;
+            background: linear-gradient(110deg, var(--cyan), #9af3df);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(69, 230, 208, 0.18);
+        }
+
+        .submit-btn:disabled {
+            cursor: wait;
+            opacity: 0.65;
+        }
+
+        .auth-message {
+            display: none;
+            margin: 16px 0 0;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 12px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .auth-message.error {
+            display: block;
+            color: var(--error);
+            border: 1px solid rgba(255, 137, 137, 0.25);
+            background: rgba(255, 80, 80, 0.07);
+        }
+
+        .auth-message.success {
+            display: block;
+            color: var(--success);
+            border: 1px solid rgba(115, 237, 176, 0.25);
+            background: rgba(70, 220, 140, 0.07);
+        }
+
+        .footer {
+            margin-top: 23px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 17px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        .security-note {
+            margin-top: 22px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            color: #829491;
+            text-align: center;
+            font-size: 10px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 480px) {
+            .signup-card {
+                padding: 27px 21px;
+                border-radius: 20px;
+            }
+
+            .brand {
+                margin-bottom: 23px;
+            }
+
+            .heading h2 {
+                font-size: 21px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="signup-card">
+
+        <header class="brand">
+            <div class="brand-mark" aria-hidden="true">G</div>
+            <h1>Gurujal Art Studio</h1>
+            <p>Art • Creativity • Memories</p>
+        </header>
+
+        <section class="heading">
+            <h2>Create Your Account</h2>
+            <p>Join us and keep your creative journey connected.</p>
+        </section>
+
+        <form id="signupForm" novalidate>
+
+            <div class="form-group">
+                <label for="signupName">Full Name</label>
+                <div class="input-wrap">
+                    <input
+                        type="text"
+                        id="signupName"
+                        name="fullname"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="signupEmail">Email Address</label>
+                <div class="input-wrap">
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        maxlength="150"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="signupPassword">Create Password</label>
+                <div class="input-wrap">
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        name="password"
+                        placeholder="At least 6 characters"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+                    <button
+                        class="toggle-password"
+                        type="button"
+                        data-target="signupPassword"
+                        aria-label="Show password"
+                        aria-pressed="false"
+                    >Show</button>
+                </div>
+                <p class="password-hint">
+                    Use at least 6 characters.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="signupConfirm">Confirm Password</label>
+                <div class="input-wrap">
+                    <input
+                        type="password"
+                        id="signupConfirm"
+                        name="confirm_password"
+                        placeholder="Enter your password again"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <button
+                        class="toggle-password"
+                        type="button"
+                        data-target="signupConfirm"
+                        aria-label="Show confirm password"
+                        aria-pressed="false"
+                    >Show</button>
+                </div>
+            </div>
+
+            <label class="terms">
+                <input type="checkbox" id="acceptTerms" required>
+                <span>
+                    I confirm that the information provided is correct
+                    and agree to use this account responsibly.
+                </span>
+            </label>
+
+            <button class="submit-btn" id="signupButton" type="submit">
+                <span>Create Account</span>
+                <span aria-hidden="true">→</span>
+            </button>
+
+            <div
+                id="signupMessage"
+                class="auth-message"
+                role="status"
+                aria-live="polite"
+            ></div>
+        </form>
+
+        <div class="footer">
+            Already have an account?
+            <a href="login_fixed.html">Sign In</a>
+        </div>
+
+        <a class="back-link" href="index.html">
+            ← Back to Website
+        </a>
+
+        <div class="security-note">
+            Your password is sent to the website's PHP backend for
+            secure processing. Never share your password with anyone.
+        </div>
+
+    </main>
+
+    <script>
+        "use strict";
+
+        const signupForm = document.getElementById("signupForm");
+        const nameInput = document.getElementById("signupName");
+        const emailInput = document.getElementById("signupEmail");
+        const passwordInput = document.getElementById("signupPassword");
+        const confirmInput = document.getElementById("signupConfirm");
+        const termsInput = document.getElementById("acceptTerms");
+        const signupButton = document.getElementById("signupButton");
+        const messageBox = document.getElementById("signupMessage");
+
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.className = "auth-message " + type;
+        }
+
+        function clearMessage() {
+            messageBox.textContent = "";
+            messageBox.className = "auth-message";
+        }
+
+        function setLoading(isLoading) {
+            signupButton.disabled = isLoading;
+            signupButton.innerHTML = isLoading
+                ? "<span>Creating Account...</span>"
+                : "<span>Create Account</span><span aria-hidden=\"true\">→</span>";
+        }
+
+        // Show / hide password
+        document.querySelectorAll(".toggle-password").forEach(function (button) {
+            button.addEventListener("click", function () {
+                const input = document.getElementById(button.dataset.target);
+                const shouldShow = input.type === "password";
+
+                input.type = shouldShow ? "text" : "password";
+                button.textContent = shouldShow ? "Hide" : "Show";
+                button.setAttribute("aria-pressed", String(shouldShow));
+                button.setAttribute(
+                    "aria-label",
+                    shouldShow ? "Hide password" : "Show password"
+                );
+            });
+        });
+
+        // Clear old errors when the user edits the form.
+        signupForm.addEventListener("input", clearMessage);
+
+        signupForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            clearMessage();
+
+            const fullname = nameInput.value.trim();
+            const email = emailInput.value.trim().toLowerCase();
+            const password = passwordInput.value;
+            const confirmPassword = confirmInput.value;
+
+            if (!fullname || !email || !password || !confirmPassword) {
+                showMessage("Please fill in all fields.", "error");
+                return;
+            }
+
+            if (fullname.length > 100 || email.length > 150) {
+                showMessage("Your name or email is too long.", "error");
+                return;
+            }
+
+            if (!emailInput.validity.valid) {
+                showMessage("Please enter a valid email address.", "error");
+                emailInput.focus();
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage(
+                    "Password must be at least 6 characters.",
+                    "error"
+                );
+                passwordInput.focus();
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showMessage("Passwords do not match.", "error");
+                confirmInput.focus();
+                return;
+            }
+
+            if (!termsInput.checked) {
+                showMessage(
+                    "Please confirm the checkbox before continuing.",
+                    "error"
+                );
+                termsInput.focus();
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                const formData = new FormData();
+                formData.append("fullname", fullname);
+                formData.append("email", email);
+                formData.append("password", password);
+                formData.append("confirm_password", confirmPassword);
+
+                const response = await fetch("signup.php", {
+                    method: "POST",
+                    body: formData,
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+
+                const responseText = await response.text();
+                let data;
+
+                try {
+                    data = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error(
+                        "Signup endpoint returned non-JSON:",
+                        response.status,
+                        responseText
+                    );
+
+                    throw new Error(
+                        "Server ne expected JSON response nahi diya. " +
+                        "HTTP status: " + response.status +
+                        ". Check karo ki signup.php online sahi jagah upload hai."
+                    );
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.message || "Server error: HTTP " + response.status
+                    );
+                }
+
+                if (data.success) {
+                    showMessage(
+                        data.message || "Account created successfully!",
+                        "success"
+                    );
+
+                    signupForm.reset();
+
+                    window.setTimeout(function () {
+                        window.location.href = "login_fixed.html";
+                    }, 1200);
+
+                } else {
+                    showMessage(
+                        data.message || "Account could not be created.",
+                        "error"
+                    );
+                }
+
+            } catch (error) {
+                console.error("Signup error:", error);
+
+                showMessage(
+                    error.message ||
+                    "Request failed. Please check your internet connection and try again.",
+                    "error"
+                );
+
+            } finally {
+                setLoading(false);
+            }
+        });
+    </script>
+</body>
+</html>

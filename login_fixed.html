@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<link rel="stylesheet" href="stylesheet.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins','Segoe UI',sans-serif;
+}
+
+html, body{
+    height:100%;
+    overflow:hidden;
+}
+
+/* ===== PREMIUM BACKGROUND ===== */
+body{
+    position:relative;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(0,234,255,.12), transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(255,215,0,.10), transparent 45%),
+        linear-gradient(160deg, #0b0d14 0%, #14101a 45%, #1a1220 100%);
+}
+
+/* floating bokeh particles (like steam / ambient light) */
+.bg-particle{
+    position:absolute;
+    bottom:-40px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(0,234,255,.55), transparent 70%);
+    filter:blur(1px);
+    opacity:0;
+    animation:floatUp linear infinite;
+    pointer-events:none;
+}
+
+.bg-particle.gold{
+    background:radial-gradient(circle, rgba(255,215,0,.5), transparent 70%);
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) translateX(0);
+        opacity:0;
+    }
+    10%{
+        opacity:.9;
+    }
+    90%{
+        opacity:.5;
+    }
+    100%{
+        transform:translateY(-110vh) translateX(30px);
+        opacity:0;
+    }
+}
+
+/* ground glow line */
+.ground-glow{
+    position:absolute;
+    left:0;
+    bottom:78px;
+    width:100%;
+    height:2px;
+    background:linear-gradient(90deg, transparent, rgba(0,234,255,.5), transparent);
+    box-shadow:0 0 20px rgba(0,234,255,.6);
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:60px;
+    background:rgba(10,12,18,.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,234,255,.15);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    z-index:100;
+}
+
+.navbar .logo{
+    font-size:22px;
+    font-weight:700;
+    color:#00eaff;
+    text-shadow:0 0 12px rgba(0,234,255,.6);
+    letter-spacing:1px;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+/* ===== SIGN IN BUTTON ===== */
+.btn-cyan-login{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 26px;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.5px;
+    color:#fff;
+    text-decoration:none;
+    border:2px solid rgba(0,234,255,.5);
+    border-radius:30px;
+    background:linear-gradient(135deg, rgba(0,234,255,.1), rgba(0,234,255,.02));
+    cursor:pointer;
+    transition:all .35s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.btn-cyan-login::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+    transition:left .5s ease;
+}
+
+.btn-cyan-login:hover::before{
+    left:100%;
+}
+
+.btn-cyan-login i{
+    font-size:16px;
+    transition:transform .3s ease;
+}
+
+.btn-cyan-login:hover i{
+    transform:translateX(4px);
+}
+
+/* Hover: yellow background + cyan glow */
+.btn-cyan-login:hover{
+    color:#1a1a1a;
+    background:linear-gradient(135deg, #FFD700, #e6b800);
+    border-color:#FFD700;
+    box-shadow:
+        0 0 20px rgba(0,234,255,.6),
+        0 0 40px rgba(0,234,255,.3),
+        0 0 60px rgba(0,234,255,.15),
+        inset 0 0 15px rgba(255,255,255,.2);
+    transform:translateY(-2px);
+}
+
+.btn-cyan-login:active{
+    transform:translateY(0);
+    box-shadow:
+        0 0 12px rgba(0,234,255,.4),
+        0 0 25px rgba(0,234,255,.2);
+}
+
+/* ===== PREMIUM RUNNING MAN ===== */
+
+.man-wrapper{
+    position:absolute;
+    bottom:90px;
+    left:-200px;
+    z-index:5;
+    filter:drop-shadow(0 0 18px rgba(0,234,255,.35));
+}
+
+.man-wrapper.running{
+    animation:runAcross 2.2s cubic-bezier(.25,.46,.45,.94) forwards;
+}
+
+@keyframes runAcross{
+    from{ left:-200px; }
+    to{ left:34%; }
+}
+
+.man-shadow{
+    position:absolute;
+    bottom:-8px;
+    left:25px;
+    width:80px;
+    height:16px;
+    background:radial-gradient(ellipse, rgba(0,0,0,.5), transparent 75%);
+    border-radius:50%;
+}
+
+.man-shadow.pulse{
+    animation:shadowPulse .35s ease-in-out infinite;
+}
+
+@keyframes shadowPulse{
+    0%, 100%{ transform:scaleX(1) scaleY(1); opacity:.5; }
+    50%{ transform:scaleX(.6) scaleY(.7); opacity:.25; }
+}
+
+/* ===== REALISTIC RUNNING MAN (SVG-based) ===== */
+.man-figure{
+    position:relative;
+    width:140px;
+    height:220px;
+}
+
+.man-figure svg{
+    width:100%;
+    height:100%;
+    overflow:visible;
+}
+
+@keyframes bodyBob{
+    0%, 100%{ transform:translate(0, 0); }
+    50%{ transform:translate(0, -4px); }
+}
+
+@keyframes armSwingL{
+    0%, 100%{ transform:rotate(30deg); }
+    50%{ transform:rotate(-30deg); }
+}
+
+@keyframes armSwingR{
+    0%, 100%{ transform:rotate(-30deg); }
+    50%{ transform:rotate(30deg); }
+}
+
+@keyframes legSwingL{
+    0%, 100%{ transform:rotate(25deg); }
+    50%{ transform:rotate(-25deg); }
+}
+
+@keyframes legSwingR{
+    0%, 100%{ transform:rotate(-25deg); }
+    50%{ transform:rotate(25deg); }
+}
+
+/* ===== Stop + Throw Pose (applied to SVG inner elements) ===== */
+.man-wrapper.stopped .man-figure svg .leg-l-group,
+.man-wrapper.stopped .man-figure svg .leg-r-group,
+.man-wrapper.stopped .man-figure svg .arm-l-group,
+.man-wrapper.stopped .man-figure svg .arm-r-group,
+.man-wrapper.stopped .man-figure svg .body-bob,
+.man-wrapper.stopped .man-figure svg .head-bob,
+.man-wrapper.stopped .man-figure svg .hat-bob{
+    animation:none !important;
+}
+
+/* Throw pose — right arm winds up and throws bag */
+.man-wrapper.stopped .man-figure svg .arm-r-group{
+    animation:throwArmR .45s ease forwards !important;
+}
+.man-wrapper.stopped .man-figure svg .arm-l-group{
+    animation:throwArmL .45s ease forwards !important;
+}
+
+@keyframes throwArmR{
+    0%{ transform:rotate(0deg); }
+    30%{ transform:rotate(-120deg); }
+    60%{ transform:rotate(10deg); }
+    100%{ transform:rotate(-10deg); }
+}
+@keyframes throwArmL{
+    0%{ transform:rotate(0deg); }
+    30%{ transform:rotate(40deg); }
+    100%{ transform:rotate(10deg); }
+}
+
+.man-wrapper.fadeout{
+    animation:manFade 1s ease forwards;
+}
+@keyframes manFade{
+    from{ opacity:1; transform:translateY(0); }
+    to{ opacity:0; transform:translateY(12px); }
+}
+
+/* ===== BAG (emoji, same as original) ===== */
+.bag{
+    position:absolute;
+    bottom:120px;
+    left:-100px;
+    font-size:64px;
+    opacity:0;
+    transform:translate(0,0) rotate(0deg);
+    will-change: transform;
+}
+
+/* Carried — follows the man */
+.bag.carried{
+    opacity:1;
+    animation:
+        runAcrossBag 2.2s cubic-bezier(.25,.46,.45,.94) forwards,
+        bagBob .38s ease-in-out infinite;
+}
+
+@keyframes runAcrossBag {
+    from { transform: translate(-100px, 0); }
+    to { transform: translate(calc(34vw + 60px), 0); }
+}
+
+@keyframes bagBob{
+    0%, 100%{ transform:translateY(-4px) rotate(-4deg); }
+    50%{ transform:translateY(6px) rotate(4deg); }
+}
+
+/* जब तक carried है तब तक छुपा रहेगा */
+.bag.carried {
+    opacity: 0 !important;
+}
+
+/* थ्रो होते ही जब .dropped क्लास आए, तब इमोजी बैग दिखना चाहिए */
+.bag.dropped {
+    opacity: 1 !important;
+    animation: bagThrowArc 1.1s cubic-bezier(.3,.6,.3,1) forwards !important;
+}
+
+/* SVG के अंदर जो पीठ पर बैग है, उसे फेंकने के बाद गायब करने के लिए एनिमेशन */
+.man-wrapper.stopped .backpack-on-body {
+    animation: backpackDetach 0.45s ease forwards !important;
+}
+
+@keyframes backpackDetach {
+    0% { transform: scale(1); opacity: 1; }
+    30% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Bag thrown in arc — premium throw animation */
+.bag.dropped{
+    animation:bagThrowArc 1.1s cubic-bezier(.3,.6,.3,1) forwards !important;
+}
+
+@keyframes bagThrowArc {
+    0% {
+        transform: translate(calc(34vw + 60px), 0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    30% {
+        transform: translate(calc(34vw + 100px), -180px) rotate(180deg) scale(1.1);
+    }
+    60% {
+        transform: translate(calc(34vw + 160px), -40px) rotate(360deg) scale(1);
+    }
+    100% {
+        transform: translate(calc(34vw + 190px), 10px) rotate(420deg) scale(.85);
+        opacity: 1;
+    }
+}
+
+/* Bag opens */
+.bag.opened{
+    animation:bagPop .55s ease forwards !important;
+}
+
+@keyframes bagPop {
+    0% { transform: translate(calc(34vw + 190px), 10px) scale(1) rotate(5deg); opacity: 1; }
+    45% { transform: translate(calc(34vw + 190px), 10px) scale(1.35) rotate(-10deg); opacity: 1; }
+    100% { transform: translate(calc(34vw + 190px), 10px) scale(0) rotate(12deg); opacity: 0; }
+}
+
+/* Hide the SVG bag — we use emoji bag instead */
+.bag-svg{
+    display:none;
+}
+
+/* ===== SPARKLE BURST (bag opening) ===== */
+
+.sparkle{
+    position:absolute;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#00eaff;
+    box-shadow:0 0 10px #00eaff, 0 0 18px #00eaff;
+    pointer-events:none;
+    z-index:7;
+    animation:sparkleBurst .8s ease-out forwards;
+}
+
+.sparkle.gold{
+    background:#FFD700;
+    box-shadow:0 0 10px #FFD700, 0 0 18px #FFD700;
+}
+
+@keyframes sparkleBurst{
+    0%{
+        transform:translate(0,0) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:translate(var(--tx), var(--ty)) scale(0);
+        opacity:0;
+    }
+}
+
+.flash{
+    position:absolute;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,.95), rgba(0,234,255,.4) 40%, transparent 70%);
+    z-index:6;
+    transform:translate(-50%,-50%) scale(0);
+    animation:flashPop .6s ease-out forwards;
+    pointer-events:none;
+}
+
+@keyframes flashPop{
+    0%{ transform:translate(-50%,-50%) scale(0); opacity:1; }
+    60%{ transform:translate(-50%,-50%) scale(8); opacity:.6; }
+    100%{ transform:translate(-50%,-50%) scale(14); opacity:0; }
+}
+
+/* ===== USER AVATAR ===== */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #e6b800);
+    color: #0b0d14;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    border: 2px solid #00eaff;
+    box-shadow: 0 0 10px rgba(0,234,255,0.5);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0,234,255,0.8);
+}
+
+/* ===== FORM BOX ===== */
+
+.form-box{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:360px;
+    max-width:88%;
+    padding:36px 32px;
+    border-radius:22px;
+
+    background:rgba(14,17,24,.78);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1.5px solid rgba(0,234,255,.35);
+
+    box-shadow:
+        0 0 25px rgba(0,234,255,.25),
+        0 0 60px rgba(0,0,0,.5),
+        inset 0 0 30px rgba(0,234,255,.04);
+
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.3) rotate(-6deg);
+    filter:blur(10px);
+    z-index:10;
+}
+
+
+.form-box.show{
+    animation:formReveal .9s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+#userMenu{
+    position:fixed;
+    top:56px;
+    right:18px;
+    z-index:3002;
+}
+
+.user-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#FFD700,#e6b800);
+    color:#000;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    cursor:pointer;
+    border:2px solid cyan;
+    box-shadow:0 0 12px cyan;
+}
+
+.user-dropdown{
+    display:none;
+    margin-top:10px;
+    background:#111;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.user-dropdown button{
+    width:100%;
+    border:none;
+    background:none;
+    color:white;
+    padding:10px 20px;
+    cursor:pointer;
+}
+
+.user-dropdown button:hover{
+    background:cyan;
+    color:black;
+}
+
+@keyframes formReveal{
+    0%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(.3) rotate(-6deg);
+        filter:blur(10px);
+    }
+    60%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.05) rotate(2deg);
+        filter:blur(0);
+    }
+    100%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1) rotate(0deg);
+        filter:blur(0);
+    }
+}
+
+.form-box h2{
+    text-align:center;
+    color:#fff;
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.form-box h2 span{
+    color:#00eaff;
+    text-shadow:0 0 12px rgba(0,234,255,.7);
+}
+
+.form-sub{
+    text-align:center;
+    color:rgba(255,255,255,.5);
+    font-size:13px;
+    margin-bottom:22px;
+    letter-spacing:.5px;
+}
+
+.form-box input{
+    width:100%;
+    padding:13px 16px;
+    margin-bottom:14px;
+
+    background:rgba(255,255,255,.04);
+    border:1.5px solid rgba(255,255,255,.14);
+    border-radius:10px;
+
+    color:#e8e8e8;
+    font-size:14px;
+    outline:none;
+
+    transition:border-color .3s ease, box-shadow .3s ease;
+}
+
+.form-box input::placeholder{
+    color:rgba(255,255,255,.35);
+}
+
+.form-box input:focus{
+    border-color:#00eaff;
+    box-shadow:0 0 12px rgba(0,234,255,.45);
+}
+
+.form-box button{
+    width:100%;
+    padding:13px;
+    margin-top:6px;
+
+    background:linear-gradient(135deg, #00eaff, #0090a8);
+    color:#04141a;
+    border:none;
+    border-radius:10px;
+
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.5px;
+    cursor:pointer;
+
+    box-shadow:0 0 15px rgba(0,234,255,.4);
+    transition:transform .25s ease, box-shadow .25s ease, background .3s ease;
+}
+
+.form-box button:hover{
+    background:linear-gradient(135deg, #FFD700, #d9a300);
+    color:#231a00;
+    transform:translateY(-3px);
+    box-shadow:0 0 20px rgba(0,234,255,.55), 0 0 35px rgba(0,234,255,.35);
+}
+
+.form-note{
+    text-align:center;
+    margin-top:16px;
+    font-size:12.5px;
+    color:rgba(255,255,255,.4);
+}
+
+.form-note a{
+    color:#00eaff;
+    text-decoration:none;
+}
+
+/* ===== DARK MODE TOGGLE + SIGN IN AREA ===== */
+.dark-mode-area{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:10px;
+}
+
+.toggle-btn{
+    padding:8px 16px;
+    font-size:13px;
+    font-weight:600;
+    color:#fff;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:20px;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+
+.toggle-btn:hover{
+    background:rgba(0,234,255,.15);
+    border-color:rgba(0,234,255,.4);
+    box-shadow:0 0 12px rgba(0,234,255,.3);
+}
+
+/* ===== REPLAY BUTTON ===== */
+.replay-btn{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:10px 24px;
+    font-size:13px;
+    font-weight:700;
+    color:#fff;
+    background:rgba(0,234,255,.1);
+    border:1.5px solid rgba(0,234,255,.4);
+    border-radius:30px;
+    cursor:pointer;
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    z-index:20;
+    transition:all .3s ease;
+    box-shadow:0 0 12px rgba(0,234,255,.25);
+}
+.replay-btn i{
+    font-size:14px;
+    transition:transform .4s ease;
+}
+.replay-btn:hover{
+    background:rgba(0,234,255,.2);
+    border-color:rgba(0,234,255,.6);
+    box-shadow:0 0 20px rgba(0,234,255,.4), 0 0 35px rgba(0,234,255,.2);
+    transform:translateX(-50%) translateY(-2px);
+}
+.replay-btn:hover i{
+    transform:rotate(360deg);
+}
+.replay-btn:active i{
+    transform:rotate(720deg);
+}
+
+@media (max-width:480px){
+    .navbar{
+        padding:0 15px;
+    }
+    .btn-cyan-login{
+        padding:8px 18px;
+        font-size:13px;
+    }
+    .man-figure svg{ transform:scale(.8); transform-origin:bottom center; }
+    .bag{ font-size:48px; }
+    .form-box{ padding:28px 22px; }
+    .replay-btn{
+        padding:8px 18px;
+        font-size:12px;
+    }
+}
+
+</style>
+
+<style>
+.auth-message{
+    min-height:20px;
+    margin:0 0 12px;
+    padding:0;
+    font-size:13px;
+    font-weight:700;
+    text-align:center;
+}
+.auth-message.error{color:#ff6b6b;}
+.auth-message.success{color:#7CFFB2;}
+.password-wrap{position:relative;width:100%;}
+.password-wrap input{width:100%;box-sizing:border-box;padding-right:52px !important;}
+.password-toggle{
+    position:absolute !important;right:7px;top:50%;transform:translateY(-50%);
+    width:40px !important;height:40px;padding:0 !important;margin:0 !important;
+    background:transparent !important;border:0 !important;box-shadow:none !important;
+    color:#00eaff;cursor:pointer;z-index:5;
+}
+.password-toggle:hover{transform:translateY(-50%) !important;color:#ffd700;}
+.form-box button:disabled{opacity:.65;cursor:not-allowed;transform:none;}
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="logo">MySite</div>
+
+    <div class="nav-right">
+        <!-- Toggle button (dark mode toggle) -->
+        <button class="toggle-btn" id="toggleBtn">
+            <i class="fa-solid fa-moon"></i> Toggle
+        </button>
+
+        <!-- Sign In button (right side of navbar) -->
+        <a href="index.html" class="btn-cyan-login" id="signinBtn">
+            <i class="fa-solid fa-house"></i> Home
+        </a>
+    </div>
+</nav>
+
+<!-- ===== User Menu (hidden by default, shown after login) ===== -->
+<div id="userMenu" style="display:none;">
+    <div class="user-avatar" id="userAvatar"></div>
+    <div id="userDropdown" class="user-dropdown">
+        <button onclick="goToIndex()">Dashboard</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<!-- ===== ANIMATION SCENE ===== -->
+<div class="ground-glow"></div>
+
+<div class="man-wrapper" id="manWrapper">
+    <div class="man-shadow" id="manShadow"></div>
+    <div class="man-figure">
+        <svg viewBox="0 0 140 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#00eaff;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#007bb5;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="legGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#0d0d1a;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="armGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#00eaff;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#0090a8;stop-opacity:1" />
+            </linearGradient>
+            <radialGradient id="headGrad" cx="40%" cy="35%">
+              <stop offset="0%" style="stop-color:#ffe8d0;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#f0b87e;stop-opacity:1" />
+            </radialGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+            <filter id="strongGlow">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feFlood flood-color="rgba(0,234,255,0.3)" result="color"/>
+              <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+              <feMerge>
+                <feMergeNode in="shadow"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- LEFT LEG (back) -->
+          <g class="leg-l-group" style="transform-origin:62px 135px; animation:legSwingL .38s ease-in-out infinite;">
+            <rect x="57" y="135" width="10" height="50" rx="4" fill="url(#legGrad)"/>
+            <rect x="54" y="182" width="18" height="8" rx="3" fill="#0d0d1a"/>
+            <rect x="66" y="182" width="6" height="8" rx="2" fill="#1a1a3e"/>
+          </g>
+
+          <!-- RIGHT LEG (front) -->
+          <g class="leg-r-group" style="transform-origin:78px 135px; animation:legSwingR .38s ease-in-out infinite;">
+            <rect x="73" y="135" width="10" height="50" rx="4" fill="url(#legGrad)"/>
+            <rect x="70" y="182" width="18" height="8" rx="3" fill="#0d0d1a"/>
+            <rect x="82" y="182" width="6" height="8" rx="2" fill="#1a1a3e"/>
+          </g>
+
+          <!-- BODY (torso) -->
+          <g class="body-bob" style="animation:bodyBob .38s ease-in-out infinite;">
+            <rect x="52" y="75" width="36" height="62" rx="10" fill="url(#bodyGrad)" filter="url(#glow)"/>
+            <line x1="58" y1="90" x2="82" y2="90" stroke="rgba(255,255,255,.15)" stroke-width="1" rx="2"/>
+            <line x1="58" y1="100" x2="82" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+          </g>
+
+          <!-- HEAD -->
+          <g class="head-bob" style="animation:bodyBob .38s ease-in-out infinite;">
+            <circle cx="70" cy="52" r="18" fill="url(#headGrad)" filter="url(#glow)"/>
+            <ellipse cx="63" cy="50" rx="3.5" ry="4" fill="#1a1a1a"/>
+            <ellipse cx="62" cy="49" rx="1.5" ry="2" fill="#fff"/>
+            <ellipse cx="77" cy="50" rx="3.5" ry="4" fill="#1a1a1a"/>
+            <ellipse cx="76" cy="49" rx="1.5" ry="2" fill="#fff"/>
+            <path d="M59,45 Q63,42 67,45" stroke="#c47a3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <path d="M73,45 Q77,42 81,45" stroke="#c47a3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <path d="M69,54 Q70,57 71,54" stroke="#d4956a" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <path d="M64,60 Q70,66 76,60" stroke="#c47a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <!-- HAT (cyan baseball cap) -->
+          <g class="hat-bob" style="animation:bodyBob .38s ease-in-out infinite;">
+            <path d="M52,34 Q70,26 88,34 L86,40 Q70,34 54,40 Z" fill="#00eaff" filter="url(#glow)"/>
+            <rect x="58" y="32" width="24" height="10" rx="4" fill="#00c8d4"/>
+            <path d="M82,34 Q90,34 94,38 L92,40 Q88,37 82,36 Z" fill="#0090a8"/>
+          </g>
+
+          <!-- LEFT ARM (behind body) -->
+          <g class="arm-l-group" style="transform-origin:54px 80px; animation:armSwingL .38s ease-in-out infinite;">
+            <rect x="49" y="78" width="8" height="44" rx="4" fill="url(#armGrad)"/>
+            <rect x="49" y="78" width="8" height="14" rx="4" fill="#00c8d4" opacity=".6"/>
+            <circle cx="53" cy="122" r="5.5" fill="#f0b87e"/>
+          </g>
+
+          <!-- RIGHT ARM (in front, holding bag) -->
+          <g class="arm-r-group" style="transform-origin:86px 80px; animation:armSwingR .38s ease-in-out infinite;">
+            <rect x="83" y="78" width="8" height="44" rx="4" fill="url(#armGrad)"/>
+            <rect x="83" y="78" width="8" height="14" rx="4" fill="#00c8d4" opacity=".6"/>
+            <circle cx="87" cy="122" r="5.5" fill="#f0b87e"/>
+          </g>
+          <g class="arm-l-group" style="transform-origin:54px 80px; animation:armSwingL .38s ease-in-out infinite;">
+            <rect x="49" y="78" width="8" height="44" rx="4" fill="url(#armGrad)"/>
+            <rect x="49" y="78" width="8" height="14" rx="4" fill="#00c8d4" opacity=".6"/>
+            <circle cx="53" cy="122" r="5.5" fill="#f0b87e"/>
+          </g>
+
+          <g class="body-bob backpack-on-body" style="animation:bodyBob .38s ease-in-out infinite; transform-origin: 70px 106px;">
+            <rect x="34" y="85" width="24" height="35" rx="8" fill="#ff5722" filter="url(#glow)"/>
+            <rect x="30" y="95" width="8" height="20" rx="4" fill="#d84315"/>
+          </g>
+
+          <g class="body-bob" style="animation:bodyBob .38s ease-in-out infinite;">
+            <rect x="52" y="75" width="36" height="62" rx="10" fill="url(#bodyGrad)" filter="url(#glow)"/>
+            <line x1="58" y1="90" x2="82" y2="90" stroke="rgba(255,255,255,.15)" stroke-width="1" rx="2"/>
+            <line x1="58" y1="100" x2="82" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+
+            <path d="M56,85 Q50,95 56,110" stroke="#d84315" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <g class="head-bob" style="animation:bodyBob .38s ease-in-out infinite;">
+            <circle cx="70" cy="52" r="18" fill="url(#headGrad)" filter="url(#glow)"/>
+            <ellipse cx="63" cy="50" rx="3.5" ry="4" fill="#1a1a1a"/>
+            <ellipse cx="62" cy="49" rx="1.5" ry="2" fill="#fff"/>
+            <ellipse cx="77" cy="50" rx="3.5" ry="4" fill="#1a1a1a"/>
+            <ellipse cx="76" cy="49" rx="1.5" ry="2" fill="#fff"/>
+            <path d="M59,45 Q63,42 67,45" stroke="#c47a3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <path d="M73,45 Q77,42 81,45" stroke="#c47a3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <path d="M69,54 Q70,57 71,54" stroke="#d4956a" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <path d="M64,60 Q70,66 76,60" stroke="#c47a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <g class="hat-bob" style="animation:bodyBob .38s ease-in-out infinite;">
+            <path d="M52,34 Q70,26 88,34 L86,40 Q70,34 54,40 Z" fill="#00eaff" filter="url(#glow)"/>
+            <rect x="58" y="32" width="24" height="10" rx="4" fill="#00c8d4"/>
+            <path d="M82,34 Q90,34 94,38 L92,40 Q88,37 82,36 Z" fill="#0090a8"/>
+          </g>
+
+          <g class="arm-r-group" style="transform-origin:86px 80px; animation:armSwingR .38s ease-in-out infinite;">
+            <rect x="83" y="78" width="8" height="44" rx="4" fill="url(#armGrad)"/>
+            <rect x="83" y="78" width="8" height="14" rx="4" fill="#00c8d4" opacity=".6"/>
+            <circle cx="87" cy="122" r="5.5" fill="#f0b87e"/>
+          </g>
+
+        </svg>
+    </div>
+</div>
+
+<div class="bag" id="bag">🎒</div>
+
+<!-- Replay Animation Button -->
+<button class="replay-btn" id="replayBtn" onclick="replayAnimation()">
+    <i class="fa-solid fa-rotate-right"></i> Replay
+</button>
+
+<div class="form-box" id="loginForm">
+    <h2>Sign <span>In</span></h2>
+    <p class="form-sub">Welcome back, log in to continue</p>
+
+    <div id="loginMessage" class="auth-message" aria-live="polite"></div>
+
+    <input type="email" id="loginEmail" placeholder="Email" autocomplete="email">
+    <div class="password-wrap">
+        <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
+        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)" aria-label="Show password">
+            <i class="fa-solid fa-eye"></i>
+        </button>
+    </div>
+
+    <button id="loginButton" onclick="loginUser()">Login</button>
+
+    <p class="form-note">New here? <a href="signup.html">Create an account</a></p>
+</div>
+
+<script>
+
+// ambient floating particles
+(function spawnBgParticles(){
+    const total = 22;
+    for(let i=0;i<total;i++){
+        const p = document.createElement('div');
+        p.className = 'bg-particle' + (Math.random() > 0.6 ? ' gold' : '');
+        const size = 4 + Math.random()*10;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random()*100 + 'vw';
+        p.style.animationDuration = (6 + Math.random()*8) + 's';
+        p.style.animationDelay = (Math.random()*8) + 's';
+        document.body.appendChild(p);
+    }
+})();
+
+const RUN_DURATION   = 2200;
+const THROW_DURATION = 1100;
+const OPEN_DURATION  = 550;
+
+let animTimeouts = [];
+
+function playAnimation(){
+    const manWrapper = document.getElementById('manWrapper');
+    const manShadow  = document.getElementById('manShadow');
+    const bag        = document.getElementById('bag');
+    const loginForm  = document.getElementById('loginForm');
+
+    manWrapper.className = 'man-wrapper running';
+    manShadow.className  = 'man-shadow pulse';
+    bag.className        = 'bag';
+    loginForm.className  = 'form-box';
+
+    animTimeouts.forEach(t => clearTimeout(t));
+    animTimeouts = [];
+
+    bag.classList.add('carried');
+
+animTimeouts.push(setTimeout(() => {
+    manWrapper.classList.add('stopped');
+    manShadow.classList.remove('pulse');
+    bag.classList.remove('carried');
+
+    const manRect = manWrapper.getBoundingClientRect();
+    bag.style.left = (manRect.left + 20) + 'px';
+    bag.style.top = (manRect.top + 40) + 'px';
+
+    bag.classList.add('dropped');
+}, RUN_DURATION));
+
+    animTimeouts.push(setTimeout(() => {
+        manWrapper.classList.add('fadeout');
+    }, RUN_DURATION + 300));
+
+    animTimeouts.push(setTimeout(() => {
+        const rect = bag.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+
+        spawnFlash(cx, cy);
+        spawnSparkles(cx, cy);
+
+        bag.classList.remove('dropped');
+        bag.classList.add('opened');
+    }, RUN_DURATION + THROW_DURATION));
+
+    animTimeouts.push(setTimeout(() => {
+        loginForm.classList.add('show');
+    }, RUN_DURATION + THROW_DURATION + OPEN_DURATION - 150));
+}
+
+// Auto play on page load
+playAnimation();
+
+function replayAnimation(){
+    const manWrapper = document.getElementById('manWrapper');
+    const bag        = document.getElementById('bag');
+    const loginForm  = document.getElementById('loginForm');
+
+    loginForm.classList.remove('show');
+    loginForm.style.opacity = '0';
+    manWrapper.className    = 'man-wrapper';
+    bag.className           = 'bag';
+
+    setTimeout(() => {
+        playAnimation();
+    }, 100);
+}
+
+function spawnFlash(x, y){
+    const f = document.createElement('div');
+    f.className = 'flash';
+    f.style.left = x + 'px';
+    f.style.top = y + 'px';
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 700);
+}
+
+function spawnSparkles(x, y){
+    const count = 14;
+    for(let i=0;i<count;i++){
+        const s = document.createElement('div');
+        s.className = 'sparkle' + (Math.random() > 0.5 ? ' gold' : '');
+        const angle = (Math.PI*2/count) * i + Math.random()*0.3;
+        const dist = 60 + Math.random()*70;
+        s.style.setProperty('--tx', Math.cos(angle)*dist + 'px');
+        s.style.setProperty('--ty', Math.sin(angle)*dist + 'px');
+        s.style.left = x + 'px';
+        s.style.top = y + 'px';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 850);
+    }
+}
+
+/* ===== REAL PHP LOGIN ===== */
+async function loginUser(){
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const message = document.getElementById("loginMessage");
+    const button = document.getElementById("loginButton");
+
+    message.className = "auth-message";
+    message.textContent = "";
+
+    if(!email || !password){
+        message.className = "auth-message error";
+        message.textContent = "Please enter email and password.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Logging in...";
+
+    try{
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+
+        const response = await fetch("login.php", {
+            method: "POST",
+            body: formData,
+            credentials: "same-origin"
+        });
+
+        const data = await response.json();
+
+        if(data.success){
+            message.className = "auth-message success";
+            message.textContent = "Login successful!";
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 500);
+        }else{
+            message.className = "auth-message error";
+            message.textContent = data.message || "Invalid email or password.";
+            button.disabled = false;
+            button.textContent = "Login";
+        }
+    }catch(error){
+        message.className = "auth-message error";
+        message.textContent = "Server error. Please make sure XAMPP Apache and MySQL are running.";
+        button.disabled = false;
+        button.textContent = "Login";
+    }
+}
+
+function togglePassword(id, button){
+    const input = document.getElementById(id);
+    const icon = button.querySelector("i");
+
+    if(input.type === "password"){
+        input.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }else{
+        input.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    checkLoginStatus();
+    const email = document.getElementById("loginEmail");
+    const password = document.getElementById("loginPassword");
+
+    [email, password].forEach(input => {
+        if(input){
+            input.addEventListener("keydown", e => {
+                if(e.key === "Enter") loginUser();
+            });
+        }
+    });
+});
+
+/* Login page only: if already logged in, offer a clean redirect */
+async function checkLoginStatus(){
+    try{
+        const response = await fetch("auth_status.php", {credentials:"same-origin"});
+        const data = await response.json();
+        if(data.loggedIn){
+            const message = document.getElementById("loginMessage");
+            if(message){
+                message.className = "auth-message success";
+                message.textContent = "You are already logged in.";
+            }
+        }
+    }catch(e){}
+}
+
+function logout(){
+    window.location.href = "logout.php";
+}
+
+function goToIndex(){
+    window.location.href = "index.html";
+}
+
+</script>
+<script src="main.js"></script>
+
+</body>
+</html>

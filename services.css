@@ -1,0 +1,1192 @@
+/*======================================================
+            SERVICES SECTION V3.0
+              PART 1 - FOUNDATION
+        Author : ChatGPT x Vignesh
+======================================================*/
+
+
+/*==============================
+        GOOGLE FONT
+==============================*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+
+/*==============================
+          VARIABLES
+==============================*/
+
+:root{
+
+    --bg:#080b14;
+
+    --card-bg:rgba(255,255,255,.06);
+
+    --card-border:rgba(255,255,255,.08);
+
+    --white:#ffffff;
+
+    --text:#d5deeb;
+
+    --cyan:#00ffff;
+
+    --radius:28px;
+
+    --transition:.4s ease;
+
+}
+
+
+/*==============================
+      SERVICES SECTION
+==============================*/
+
+#services{
+
+    position:relative;
+
+    width:100%;
+
+    padding:120px 8%;
+
+    background:var(--bg);
+
+    overflow:hidden;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+/*==============================
+      BACKGROUND
+==============================*/
+
+.services-bg{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at top left,
+    rgba(0,255,255,.08),
+    transparent 45%),
+
+    radial-gradient(circle at bottom right,
+    rgba(0,102,255,.10),
+    transparent 45%),
+
+    #080b14;
+
+    z-index:0;
+
+}
+
+
+/*==============================
+      CONTAINER
+==============================*/
+
+.services{
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+.services-container{
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+
+/*==============================
+        TITLE
+==============================*/
+
+.service-title{
+
+    font-size:3.8rem;
+
+    font-weight:800;
+
+    color:var(--white);
+
+    text-align:center;
+
+    margin-bottom:80px;
+
+    letter-spacing:2px;
+
+    position:relative;
+
+    z-index:50;
+
+}
+
+.service-title span{
+
+    color:var(--cyan);
+
+}
+
+
+/*==============================
+        GRID
+==============================*/
+
+.service-boxes{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:35px;
+
+}
+
+
+/*==============================
+        CARD
+==============================*/
+
+.service-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:430px;
+
+    padding:40px;
+
+    border-radius:var(--radius);
+
+    background:var(--card-bg);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid var(--card-border);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/*==============================
+      CARD CONTENT
+==============================*/
+
+.service-box>*{
+
+    position:relative;
+
+    z-index:20;
+
+}
+
+
+/*==============================
+        RESPONSIVE
+==============================*/
+
+@media(max-width:991px){
+
+.service-boxes{
+
+grid-template-columns:1fr;
+
+}
+
+.service-title{
+
+font-size:3rem;
+
+}
+
+}
+
+@media(max-width:768px){
+
+#services{
+
+padding:90px 25px;
+
+}
+
+.service-title{
+
+font-size:2.4rem;
+
+}
+
+.service-box{
+
+padding:30px;
+
+}
+
+}
+/*======================================================
+            SERVICES SECTION V3.0
+         PART 2 - COLORS & CONTENT
+======================================================*/
+
+
+/*==============================
+          CARD COLORS
+==============================*/
+
+.card-red{
+
+    --accent:#ff4d6d;
+    --accent-dark:#ff1744;
+
+}
+
+.card-yellow{
+
+    --accent:#FFD54A;
+    --accent-dark:#FFC107;
+
+}
+
+.card-blue{
+
+    --accent:#26c6ff;
+    --accent-dark:#007bff;
+
+}
+
+.card-green{
+
+    --accent:#00ff99;
+    --accent-dark:#00c853;
+
+}
+
+
+/*==============================
+        CARD BORDER
+==============================*/
+
+.card-red{
+
+    border-color:rgba(255,77,109,.28);
+
+}
+
+.card-yellow{
+
+    border-color:rgba(255,213,74,.28);
+
+}
+
+.card-blue{
+
+    border-color:rgba(38,198,255,.28);
+
+}
+
+.card-green{
+
+    border-color:rgba(0,255,153,.28);
+
+}
+
+
+/*==============================
+        ICON CIRCLE
+==============================*/
+
+.icon-circle{
+
+    width:82px;
+
+    height:82px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:28px;
+
+    background:linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-dark));
+
+    box-shadow:
+    0 0 15px var(--accent),
+    0 0 40px rgba(255,255,255,.08);
+
+    transition:var(--transition);
+
+    z-index:25;
+
+}
+
+
+/*==============================
+        ICON
+==============================*/
+
+.icon-circle i{
+
+    color:#fff;
+
+    font-size:36px;
+
+}
+
+
+/*==============================
+        TITLE
+==============================*/
+
+.service-box h2{
+
+    color:#fff;
+
+    font-size:1.9rem;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+    line-height:1.3;
+
+    position:relative;
+
+    z-index:30;
+
+    transition:var(--transition);
+
+}
+
+
+/*==============================
+      DESCRIPTION
+==============================*/
+
+.service-box p{
+
+    color:var(--text);
+
+    font-size:15px;
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+
+    position:relative;
+
+    z-index:30;
+
+}
+
+
+/*==============================
+        LEARN MORE
+==============================*/
+
+.more-text{
+
+    max-height:0;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transition:
+
+    max-height .45s ease,
+
+    opacity .35s ease,
+
+    margin-top .35s ease;
+
+}
+
+
+.more-text.show{
+
+    max-height:320px;
+
+    opacity:1;
+
+    margin-top:14px;
+
+}
+
+
+/*==============================
+        BUTTON
+==============================*/
+
+/*==============================
+      BUTTON GLOW
+==============================*/
+
+.learn-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+    color:#fff;
+
+    background:linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-dark));
+
+    box-shadow:
+
+    0 0 10px color-mix(in srgb,var(--accent) 35%,transparent),
+
+    0 0 25px color-mix(in srgb,var(--accent) 55%,transparent),
+
+    0 0 45px color-mix(in srgb,var(--accent) 25%,transparent);
+
+}
+
+
+/*==============================
+      BUTTON ACTIVE
+==============================*/
+
+.learn-btn:active{
+
+    transform:scale(.97);
+
+}
+/*======================================================
+            SERVICES SECTION V3.0
+        PART 3 - PREMIUM HOVER EFFECTS
+======================================================*/
+
+
+/*==============================
+      PREMIUM ROTATING BORDER
+==============================*/
+
+.service-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-2px;
+
+    border-radius:inherit;
+
+    padding:2px;
+
+    background:conic-gradient(
+
+        from 0deg,
+
+        transparent,
+
+        var(--accent),
+
+        transparent,
+
+        var(--accent),
+
+        transparent
+
+    );
+
+    -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
+    -webkit-mask-composite:xor;
+
+    mask-composite:exclude;
+
+    animation:borderRotate 8s linear infinite;
+
+    opacity:.85;
+
+    pointer-events:none;
+
+}
+
+
+/*==============================
+        GLASS SHINE
+==============================*/
+
+.service-box::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-140%;
+
+    width:60%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        115deg,
+
+        transparent,
+
+        rgba(255,255,255,.22),
+
+        transparent
+
+    );
+
+    transform:skewX(-25deg);
+
+    transition:left .9s ease;
+
+    pointer-events:none;
+
+}
+
+
+.service-box:hover::after{
+
+    left:170%;
+
+}
+
+
+/*==============================
+      CARD HOVER
+==============================*/
+
+.service-box{
+
+    transition:
+
+    transform .45s ease,
+
+    box-shadow .45s ease,
+
+    border-color .45s ease;
+
+}
+
+
+.service-box:hover{
+
+    transform:
+
+    translateY(-12px)
+
+    scale(1.02);
+
+    border-color:var(--accent);
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.45),
+
+    0 0 30px color-mix(in srgb,var(--accent) 40%, transparent);
+
+}
+
+
+/*==============================
+      ICON HOVER
+==============================*/
+
+.icon-circle{
+
+    transition:
+
+    transform .6s ease,
+
+    box-shadow .4s ease;
+
+}
+
+
+.service-box:hover .icon-circle{
+
+    transform:
+
+    rotate(360deg)
+
+    scale(1.1);
+
+    box-shadow:
+
+    0 0 20px var(--accent),
+
+    0 0 45px var(--accent);
+
+}
+
+
+/*==============================
+      TITLE HOVER
+==============================*/
+
+.service-box:hover h2{
+
+    color:var(--accent);
+
+    transform:translateY(-3px);
+
+}
+
+
+/*==============================
+      PARAGRAPH HOVER
+==============================*/
+
+.service-box:hover p{
+
+    transform:translateY(-2px);
+
+}
+
+
+/*==============================
+      BUTTON
+==============================*/
+
+.learn-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.learn-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.45),
+
+        transparent
+
+    );
+
+    transform:skewX(-25deg);
+
+    transition:left .8s ease;
+
+}
+
+
+.learn-btn:hover::before{
+
+    left:160%;
+
+}
+
+
+.learn-btn:hover{
+
+    transform:
+    translateY(-4px);
+
+    box-shadow:
+
+    0 0 15px var(--accent),
+
+    0 0 35px var(--accent),
+
+    0 0 60px color-mix(in srgb,var(--accent) 60%,transparent);
+
+}
+
+
+/*==============================
+      BORDER ANIMATION
+==============================*/
+
+@keyframes borderRotate{
+
+    100%{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+/*======================================================
+            SERVICES SECTION V3.0
+          PART 4 - 3D FOUNDATION
+======================================================*/
+
+
+/*==============================
+      REAL 3D ENGINE
+==============================*/
+
+.service-box{
+
+    will-change:transform;
+
+}
+
+
+/*==============================
+      CONTENT DEPTH
+==============================*/
+
+.icon-circle{
+
+    transition:
+
+    transform .35s ease,
+
+    filter .35s ease;
+
+}
+
+
+.service-box h2{
+
+position:relative;
+
+z-index:50;
+
+transform:none;
+
+backface-visibility:hidden;
+
+-webkit-backface-visibility:hidden;
+
+}
+
+.service-box p{
+
+    position:relative;
+
+    z-index:100;
+
+    backface-visibility:hidden;
+
+}
+
+
+.learn-btn{
+
+    transition:
+
+    transform .35s ease,
+
+    box-shadow .35s ease;
+
+}
+
+
+/*==============================
+      EXTRA DEPTH
+==============================*/
+
+.service-box:hover h2{
+
+transform:translateY(-3px);
+
+}
+
+.service-box::before{
+
+z-index:0;
+
+}
+
+.service-box::after{
+
+z-index:1;
+
+}
+
+.icon-circle,
+.service-box h2,
+.service-box p,
+.learn-btn,
+.more-text{
+
+    position:relative;
+    z-index:10;
+
+}
+
+.particles{
+
+    z-index:1;
+
+}
+
+.mouse-light{
+
+    z-index:2;
+
+}
+
+
+/*==============================
+      MOUSE SPOTLIGHT
+==============================*/
+
+.mouse-light{
+
+    position:absolute;
+
+    width:240px;
+
+    height:240px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(255,255,255,.25),
+
+        transparent 72%
+
+    );
+
+    pointer-events:none;
+
+    left:0;
+
+    top:0;
+
+    transform:translate(-50%,-50%);
+
+    opacity:0;
+
+    transition:opacity .25s ease;
+
+    mix-blend-mode:screen;
+
+    z-index:2;
+
+}
+
+
+.service-box:hover .mouse-light{
+
+    opacity:1;
+
+}
+
+
+/*==============================
+      FLOATING ANIMATION
+==============================*/
+
+
+/*======================================================
+            SERVICES SECTION V3.0
+        PART 5 - PREMIUM PARTICLES
+======================================================*/
+
+
+/*==============================
+        PARTICLE LAYER
+==============================*/
+
+.particles{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:1;
+
+}
+
+
+/*==============================
+        BASE PARTICLE
+==============================*/
+
+.particles span{
+
+    position:absolute;
+
+    bottom:-30px;
+
+    border-radius:50%;
+
+    opacity:0;
+
+    animation:particleFloat linear infinite;
+
+    filter:blur(1px);
+
+}
+
+
+/*==============================
+        SMALL
+==============================*/
+
+.particles span.small{
+
+    width:6px;
+
+    height:6px;
+
+}
+
+
+/*==============================
+        MEDIUM
+==============================*/
+
+.particles span.medium{
+
+    width:12px;
+
+    height:12px;
+
+}
+
+
+/*==============================
+        LARGE
+==============================*/
+
+.particles span.large{
+
+    width:18px;
+
+    height:18px;
+
+    filter:blur(2px);
+
+}
+
+
+/*==============================
+        GLOW EFFECT
+==============================*/
+
+.particles span{
+
+    box-shadow:
+
+    0 0 8px currentColor,
+
+    0 0 18px currentColor,
+
+    0 0 30px currentColor;
+
+}
+
+
+/*==============================
+      CARD COLORS
+==============================*/
+
+.card-red .particles span{
+
+    color:#ff4d6d;
+
+    background:#ff4d6d;
+
+}
+
+
+.card-yellow .particles span{
+
+    color:#FFD54A;
+
+    background:#FFD54A;
+
+}
+
+
+.card-blue .particles span{
+
+    color:#26c6ff;
+
+    background:#26c6ff;
+
+}
+
+
+.card-green .particles span{
+
+    color:#00ff99;
+
+    background:#00ff99;
+
+}
+
+
+/*==============================
+      FLOAT ANIMATION
+==============================*/
+
+@keyframes particleFloat{
+
+    0%{
+
+        transform:
+
+        translateY(0)
+
+        translateX(0)
+
+        scale(.2)
+
+        rotate(0deg);
+
+        opacity:0;
+
+    }
+
+    10%{
+
+        opacity:1;
+
+    }
+
+    40%{
+
+        transform:
+
+        translateY(-160px)
+
+        translateX(-12px)
+
+        scale(.8)
+
+        rotate(120deg);
+
+    }
+
+    70%{
+
+        transform:
+
+        translateY(-320px)
+
+        translateX(18px)
+
+        scale(1.1)
+
+        rotate(240deg);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:
+
+        translateY(-520px)
+
+        translateX(35px)
+
+        scale(1.4)
+
+        rotate(360deg);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/*==============================
+    PARTICLE BRIGHTNESS
+==============================*/
+
+.service-box:hover .particles span{
+
+    filter:
+
+    brightness(1.3)
+
+    blur(1px);
+
+}
+.service-box{
+
+    opacity:0;
+    transform:translateY(60px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        box-shadow .45s ease,
+        border-color .45s ease;
+
+}
+
+.service-box.show{
+
+    opacity:1;
+    transform:translateY(0);
+
+}
+.particles span.small{ width:10px; height:10px; }
+.particles span.medium{ width:18px; height:18px; }
+.particles span.large{ width:26px; height:26px; filter: blur(2px); }
+
+.service-box{
+    transform-style: preserve-3d;
+    transition: transform .15s ease, box-shadow .45s ease, border-color .45s ease;
+}
+
+/* purane hover transform ko hata do (JS control karega ab) */
+.service-box:hover{
+    border-color: var(--accent);
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.45),
+    0 0 30px color-mix(in srgb,var(--accent) 40%, transparent);
+}
